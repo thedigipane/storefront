@@ -29,7 +29,7 @@ class DataGrid extends Component {
         })
 
         if (search.length > 2) {
-            
+
             Axios.get(`${Config.prod}/api/component/${check ? search : `search?q=${search}`}`, {
                 params: {
                     token: loadUserToken()
@@ -103,7 +103,7 @@ class DataGrid extends Component {
                                             }
                                         </Col>
                                         <Col className="col-7 pt-3 text-right pr-3">
-                                            <h6  ><b>ID: </b>{check ? item._source.componentid : item.componentid}23</h6>
+                                            <h6  ><b>ID: </b>{check ? item._source.componentid : item.componentid}</h6>
                                             <h6  ><b>Model:</b> {check ? item._source.mfgmodelnumber : item.mfgmodelnumber}</h6>
                                         </Col>
                                     </Row>
