@@ -99,22 +99,23 @@ class DataGrid extends Component {
                                     <Row className="p-2 pt-3" noGutters>
                                         <Col className="col-5 p-2">
                                             {
-                                                check ? <img alt="not-found" src={item._source.images ? item.source.images[0] : ''} className="img-fluid" /> : <img alt="not-forund" src={item.images[0]} className="img-fluid" />
+                                                check ? <img alt="not-found" src={item.images ? item.images[0] : ''} className="img-fluid" /> : <img alt="not-forund" src={item.images[0]} className="img-fluid" />
                                             }
                                         </Col>
                                         <Col className="col-7 pt-3 text-right pr-3">
-                                            <h6  ><b>ID: </b>{check ? item._source.componentid : item.componentid}</h6>
-                                            <h6  ><b>Model:</b> {check ? item._source.mfgmodelnumber : item.mfgmodelnumber}</h6>
+                                            <h6><b>ID: </b>{check ? item.componentid : item.componentid}</h6>
+                                            <h6><b>Model: </b> {check ? item.mfgmodelnumber : item.mfgmodelnumber}</h6>
+                                            <h6><b>Sizes: </b>{check ? item.sizes : item.sizes}</h6>
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <div>
 
-                                            <h6  ><b>Taxonomy:</b> {check ? item._source.taxonomy : item.taxonomy}</h6>
+                                            <h6><b>Taxonomy: </b> {check ? item.taxonomy : item.taxonomy}</h6>
                                             <h6>
-                                                <b>Elastomerdescription</b>{check ? item._source.elastomerdescription : item.elastomerdescription}
+                                                <b>Elastomers: </b>{check ? item.elastomers : item.elastomers}
                                             </h6>
-                                            <h6  ><b>Stockroomlabel: </b>{check ? item._source.stockroomlabel : item.stockroomlabel}</h6>
+                                            <h6><b>Stockroomlabel: </b>{check ? item.stockroomlabel : item.stockroomlabel}</h6>
                                         </div>
                                     </Card.Body>
                                 </Card>
