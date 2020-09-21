@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import windowSize from 'react-window-size';
 
@@ -22,11 +22,30 @@ class Navigation extends Component {
 
     componentDidMount() {
         this.resize();
-        window.addEventListener('resize', this.resize)
+        window.addEventListener('resize', this.resize);
+        window.addEventListener('keydown', this.renderNavigation);
     }
-
+    renderNavigation = (event) => {
+        const { history } = this.props;
+        if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'd') {
+            history.push('/dashboard/default')
+        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 's') {
+            history.push('/basic/search')
+        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'c') {
+            history.push('/basic/carts')
+        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'l') {
+            history.push('/basic/locations')
+        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'a') {
+            history.push('/basic/alerts')
+        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'r') {
+            history.push('/basic/reports')
+        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'c') {
+            history.push('/basic/charts')
+        }
+    }
     componentWillUnmount() {
         window.removeEventListener('resize', this.resize)
+        window.removeEventListener('keydown', this.renderNavigation);
     }
 
     render() {
@@ -42,8 +61,8 @@ class Navigation extends Component {
                 this.props.layoutType,
                 this.props.navBackColor,
                 this.props.navBrandColor,
-                'drp-icon-'+this.props.navDropdownIcon,
-                'menu-item-icon-'+this.props.navListIcon,
+                'drp-icon-' + this.props.navDropdownIcon,
+                'menu-item-icon-' + this.props.navListIcon,
                 this.props.navActiveListColor,
                 this.props.navListTitleColor,
             ];
@@ -157,8 +176,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onToggleNavigation: () => dispatch({type: actionTypes.COLLAPSE_MENU}),
-        onChangeLayout: (layout) => dispatch({type: actionTypes.CHANGE_LAYOUT, layout: layout}),
+        onToggleNavigation: () => dispatch({ type: actionTypes.COLLAPSE_MENU }),
+        onChangeLayout: (layout) => dispatch({ type: actionTypes.CHANGE_LAYOUT, layout: layout }),
     }
 };
 

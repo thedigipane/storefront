@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {NavLink} from 'react-router-dom';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import windowSize from 'react-window-size';
 
 import Aux from "../../../../../../hoc/_Aux";
@@ -23,20 +23,20 @@ class NavItem extends Component {
         }
 
         let subContent;
-        if(this.props.item.external) {
+        if (this.props.item.external) {
             subContent = (
                 <a href={this.props.item.url} target='_blank' rel='noopener noreferrer'>
-                    <NavIcon items={this.props.item}/>
+                    <NavIcon items={this.props.item} />
                     {itemTitle}
-                    <NavBadge layout={this.props.layout} items={this.props.item}/>
+                    <NavBadge layout={this.props.layout} items={this.props.item} />
                 </a>
             );
         } else {
             subContent = (
-                <NavLink to={this.props.item.url} className="nav-link" exact={true} target={itemTarget}>
-                    <NavIcon items={this.props.item}/>
+                <NavLink to={this.props.item.url} className="nav-link" exact={true}  target={itemTarget}>
+                    <NavIcon items={this.props.item} />
                     {itemTitle}
-                    <NavBadge layout={this.props.layout} items={this.props.item}/>
+                    <NavBadge layout={this.props.layout} items={this.props.item} />
                 </NavLink>
             );
         }
@@ -74,9 +74,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onItemClick: () => dispatch({type: actionTypes.COLLAPSE_MENU}),
-        onItemLeave: () => dispatch({type: actionTypes.NAV_CONTENT_LEAVE})
+        onItemClick: () => dispatch({ type: actionTypes.COLLAPSE_MENU }),
+        onItemLeave: () => dispatch({ type: actionTypes.NAV_CONTENT_LEAVE })
     }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps) (windowSize(NavItem)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(windowSize(NavItem)));

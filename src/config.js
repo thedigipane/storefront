@@ -20,7 +20,7 @@ export default {
     navListTitleColor: 'title-default', // title-default, (title-blue, title-red, title-purple, title-lightblue, title-dark are not available in lite version)
     navListTitleHide: false, // not available in lite version
     configBlock: false, // not available in lite version
-    layout6Background : 'linear-gradient(to right, #A445B2 0%, #D41872 52%, #FF0066 100%)', // used only for pre-layout = layout-6
-    layout6BackSize : '', // used only for pre-layout = layout-6
-    prod:'http://54.176.243.227:8080'
+    layout6Background: 'linear-gradient(to right, #A445B2 0%, #D41872 52%, #FF0066 100%)', // used only for pre-layout = layout-6
+    layout6BackSize: '', // used only for pre-layout = layout-6
+    prod: 'http://50.18.9.107:8080'
 };

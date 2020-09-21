@@ -15,11 +15,21 @@ class NavRight extends Component {
     state = {
         listOpen: false,
         fName: '',
-        lName: ''
+        lName: '',
+        loggedin: false
     };
     componentDidMount() {
         const { fName, lName } = jwtdecode();
         this.setState({ fName, lName })
+        window.addEventListener('keydown', this.renderCosmeticClicks);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.renderCosmeticClicks);
+    }
+    renderCosmeticClicks = (event) => {
+        if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'x') {
+            this.renderLoggedin();
+        }
     }
     logout = () => {
         const { history } = this.props;
@@ -28,15 +38,20 @@ class NavRight extends Component {
         });
 
     }
+    renderLoggedin = () => {
+        this.setState(state => ({
+            loggedin: !state.loggedin
+        }))
+    }
     render() {
-        const { fName, lName } = this.state;
+        const { fName, lName, loggedin } = this.state;
         return (
             <Aux>
                 <ul className="navbar-nav ml-auto">
                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout}>
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
-                                <i className="icon feather icon-bell" style={{fontSize:'20px'}} />
+                                <i className="icon feather icon-bell" style={{ fontSize: '20px' }} />
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="notification">
                                 <div className="noti-head">
@@ -90,15 +105,15 @@ class NavRight extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </li>
-                    <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'} style={{fontSize:'20px'}}>
+                    <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'} style={{ fontSize: '20px' }}>
                         <a href={DEMO.BLANK_LINK} className="displayChatbox" onClick={() => { this.setState({ listOpen: true }); }}><i className="icon feather icon-mail" /></a>
                     </li>
                     <li>
-                        <Dropdown alignRight={!this.props.rtlLayout} className="drp-user">
-                            <Dropdown.Toggle variant={'link'} id="dropdown-basic">
-                                <i className="icon feather icon-settings" style={{fontSize:'20px'}} />
+                        <Dropdown alignRight={!this.props.rtlLayout} show={loggedin} onToggle={() => this.renderLoggedin()} className="drp-user">
+                            <Dropdown.Toggle variant={'link'} id="dropdown-basic" >
+                                <i className="icon feather icon-settings" style={{ fontSize: '20px' }} />
                             </Dropdown.Toggle>
-                            <Dropdown.Menu alignRight className="profile-notification">
+                            <Dropdown.Menu alignRight className="profile-notification" >
                                 <div className="pro-head">
                                     <img src={Avatar1} className="img-radius" alt="User Profile" />
                                     <span>{fName + ' ' + lName}</span>

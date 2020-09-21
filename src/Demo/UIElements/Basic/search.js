@@ -19,17 +19,39 @@ class DataGrid extends Component {
         search: '',
         items: [],
         isLoading: false,
-        check: false
+        check: false,
+        searchRef: ''
     };
+    componentDidMount() {
+        window.addEventListener('keydown', this.renderCosmeticClicks);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.renderCosmeticClicks);
+    }
+    renderCosmeticClicks = (event) => {
+        // const { history } = this.props;
+        if (event.ctrlKey && event.altKey && event.key == 0) {
+            this.renderSearchField();
+        }
+        const { history } = this.props;
+        const { items } = this.state;
+        items.map((item, index) => {
+            if (event.ctrlKey && event.altKey && event.key == index + 1) {
+                localStorage.setItem('searchitem', JSON.stringify(item));
+                history.push(`/basic/detail/${item.componentid}`)
+            }
+            return item;
+        })
+    }
     HandleInput = (e) => {
         let search = e.target.value;
         const { check } = this.state;
+        const { history } = this.props;
         this.setState({
             [e.target.name]: search
         })
 
         if (search.length > 2) {
-
             Axios.get(`${Config.prod}/api/component/${check ? search : `search?q=${search}`}`, {
                 params: {
                     token: loadUserToken()
@@ -38,7 +60,8 @@ class DataGrid extends Component {
                 // console.log(data);
                 this.setState({ items: data })
             }).catch(error => {
-                createNotification('error', 'Please Login Again')
+                createNotification('error', 'Please Login Again');
+                history.push('/auth/session')
             })
         }
     }
@@ -55,13 +78,18 @@ class DataGrid extends Component {
     renderByCheckId = (check) => {
         this.setState({ search: '', items: [], check: !check })
     }
+    renderSearchField = () => {
+        let input = document.getElementById('m-search')
+        input.focus()
+    }
     render() {
         const { items, check } = this.state;
+        const { history } = this.props;
         return (
             <Aux>
                 <div className="pcoded-header" style={style}>
                     <div id="main-search" className="main-search open ml-0 w-100">
-                        <div className="input-group" style={{height:'50px'}}>
+                        <div className="input-group" style={{ height: '50px' }}>
                             <input type={check ? 'number' : 'text'}
                                 id="m-search"
                                 className="form-control"
@@ -71,7 +99,7 @@ class DataGrid extends Component {
                                 onChange={(e) => this.HandleInput(e)}
                             />
                             <a href={DEMO.BLANK_LINK} className="input-group-append search-close" onClick={() => this.searchOffHandler()}>
-                                <i className="feather icon-x input-group-text" style={{fontSize:'22px'}} />
+                                <i className="feather icon-x input-group-text" style={{ fontSize: '22px' }} />
                             </a>
                             {/* <span className="input-group-append search-btn btn btn-primary" onClick={this.searchOnHandler}>
                                 <i className="feather icon-search input-group-text" />
@@ -95,27 +123,31 @@ class DataGrid extends Component {
                     {
                         items.map((item, index) => (
                             <Col className="col-12 col-sm-6 col-lg-4  mb-2" key={index}>
-                                <Card style={{ borderRadius: '5px' }}  >
+                                <Card style={{ borderRadius: '5px', cursor: 'pointer' }} onClick={() => {
+                                    history.push(`/basic/detail/${item.componentid}`);
+                                    localStorage.setItem('searchitem', JSON.stringify(item));
+                                }} >
                                     <Row className="p-2 pt-3" noGutters>
                                         <Col className="col-5 p-2">
                                             {
-                                                check ? <img alt="not-found" src={item.images ? item.images[0] : ''} className="img-fluid" /> : <img alt="not-forund" src={item.images[0]} className="img-fluid" />
+                                                <img alt={item.imagedescription} src={item.images[0]} className="img-fluid" />
                                             }
                                         </Col>
                                         <Col className="col-7 pt-3 text-right pr-3">
-                                            <h6><b>ID: </b>{check ? item.componentid : item.componentid}</h6>
-                                            <h6><b>Model: </b> {check ? item.mfgmodelnumber : item.mfgmodelnumber}</h6>
-                                            <h6><b>Sizes: </b>{check ? item.sizes : item.sizes}</h6>
+                                            <h6  ><b>Description: </b>{item.categorydescription}</h6>
+                                            <h6  ><b>ID: </b>{item.componentid}</h6>
+                                            <h6  ><b>Company Name:</b> {item.companyname}</h6>
+                                            <h6  ><b>Model:</b> {item.mfgmodelnumber}</h6>
+                                            {/* <h6  ><b>Supplier-Company:</b> {item.companyname}</h6> */}
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <div>
-
-                                            <h6><b>Taxonomy: </b> {check ? item.taxonomy : item.taxonomy}</h6>
+                                            <h6  ><b>Taxonomy:</b> {item.taxonomy}</h6>
                                             <h6>
-                                                <b>Elastomers: </b>{check ? item.elastomers : item.elastomers}
+                                                <b>Elastomerdescription: </b>{item.elastomerdescription}
                                             </h6>
-                                            <h6><b>Stockroomlabel: </b>{check ? item.stockroomlabel : item.stockroomlabel}</h6>
+                                            <h6  ><b>Stockroomlabel: </b>{item.stockroomlabel}</h6>
                                         </div>
                                     </Card.Body>
                                 </Card>

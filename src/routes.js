@@ -14,9 +14,15 @@ const UIBasicBreadcrumbPagination = React.lazy(() => import('./Demo/UIElements/B
 const UIBasicCollapse = React.lazy(() => import('./Demo/UIElements/Basic/Collapse'));
 const UIBasicTabsPills = React.lazy(() => import('./Demo/UIElements/Basic/TabsPills'));
 const UIBasicBasicTypography = React.lazy(() => import('./Demo/UIElements/Basic/Typography'));
-const Component = React.lazy(() => import('./Demo/UIElements/Basic/datagrid'));
-
-const FormsElements = React.lazy(() => import('./Demo/Forms/FormsElements'));
+const Search = React.lazy(() => import('./Demo/UIElements/Basic/search'));
+const ProductDetail = React.lazy(() => import('./Demo/UIElements/Basic/productdetail'));
+const Products = React.lazy(() => import('./Demo/UIElements/Basic/products'));
+const Carts = React.lazy(() => import('./Demo/UIElements/Basic/cart'));
+const Alerts = React.lazy(() => import('./Demo/UIElements/Basic/alert'));
+const Reports = React.lazy(() => import('./Demo/UIElements/Basic/report'));
+const Locations = React.lazy(() => import('./Demo/UIElements/Basic/location'));
+const Charts = React.lazy(() => import('./Demo/UIElements/Basic/charts'));
+// const FormsElements = React.lazy(() => import('./Demo/Forms/FormsElements'));
 
 const BootstrapTable = React.lazy(() => import('./Demo/Tables/BootstrapTable'));
 
@@ -37,8 +43,15 @@ const routes = [
     { path: '/basic/collapse', exact: true, name: 'Basic Collapse', component: UIBasicCollapse },
     { path: '/basic/tabs-pills', exact: true, name: 'Basic Tabs & Pills', component: UIBasicTabsPills },
     { path: '/basic/typography', exact: true, name: 'Basic Typography', component: UIBasicBasicTypography },
-    { path: '/basic/search', exact: true, name: 'Search', component: RequireAuth(Component) },
-    { path: '/forms/form-basic', exact: true, name: 'Forms Elements', component: FormsElements },
+    { path: '/basic/search', exact: true, name: 'Search', component: RequireAuth(Search) },
+    { path: '/basic/detail/:componentid', exact: true, name: 'ProductDetail', component: RequireAuth(ProductDetail) },
+    { path: '/basic/products/:stockid/:componentid', exact: true, name: 'Products', component: RequireAuth(Products) },
+    { path: '/basic/carts', exact: true, name: 'Cart', component: RequireAuth(Carts) },
+    { path: '/basic/alerts', exact: true, name: 'Alert', component: RequireAuth(Alerts) },
+    { path: '/basic/reports', exact: true, name: 'Report', component: RequireAuth(Reports) },
+    { path: '/basic/charts', exact: true, name: 'Chart', component: RequireAuth(Charts) },
+    { path: '/basic/locations', exact: true, name: 'Location', component: RequireAuth(Locations) },
+    
     { path: '/tables/bootstrap', exact: true, name: 'Bootstrap Table', component: BootstrapTable },
     { path: '/charts/nvd3', exact: true, name: 'Nvd3 Chart', component: Nvd3Chart },
     { path: '/maps/google-map', exact: true, name: 'Google Map', component: GoogleMap },

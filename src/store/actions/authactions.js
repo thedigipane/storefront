@@ -19,7 +19,6 @@ export const loaduser = () => (dispatch, getSate) => {
 export const login = (body) => (dispatch) => {
     dispatch({ type: USER_LOADING });
     axios(loadHeaders(`${config.prod}/api/session`, body, 'POST')).then(result => {
-        console.log(result)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: result.data

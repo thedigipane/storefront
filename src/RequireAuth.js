@@ -23,7 +23,7 @@ export default function (ComposedComponent) {
             // }).catch(error => {
 
             // })
-            if(localStorage.getItem('mannkamal_user_token')){
+            if (localStorage.getItem('mannkamal_user_token')) {
                 Axios(`${config.prod}/api/token`, {
                     method: 'GET', // or 'PUT'
                     headers: {
@@ -50,14 +50,14 @@ export default function (ComposedComponent) {
                                 history.push('/auth/session')
                             })
                         }
-    
+
                     }).catch(error => {
                         history.push('/auth/session')
                     })
-            }else{
+            } else {
                 history.push('/auth/session')
             }
-            
+
         }
 
         render() {
