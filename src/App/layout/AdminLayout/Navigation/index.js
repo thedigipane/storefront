@@ -26,22 +26,50 @@ class Navigation extends Component {
         window.addEventListener('keydown', this.renderNavigation);
     }
     renderNavigation = (event) => {
-        const { history } = this.props;
-        if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'd') {
+      console.log("key pressed.", event);
+      // console.log("event.ctrlKey: ", event.ctrlKey);
+      // console.log("event.altKey: ", event.altKey);
+      // console.log("String(event.key).toLowerCase()", String(event.key).toLowerCase());
+      // console.log("navigator.userAgent: ", navigator.userAgent);
+      // console.log("navigator.appVersion: ", navigator.appVersion);
+
+      const { history } = this.props;
+
+      if (navigator.appVersion.indexOf("Mac")!=-1) {
+        if (event.ctrlKey && event.altKey && event.code === 'KeyD') {
             history.push('/dashboard/default')
-        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 's') {
+        } else if (event.ctrlKey && event.altKey && event.code === 'KeyS') {
             history.push('/basic/search')
-        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'c') {
+        } else if (event.ctrlKey && event.altKey && event.code === 'KeyC') {
             history.push('/basic/carts')
-        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'l') {
+        } else if (event.ctrlKey && event.altKey && event.code === 'KeyL') {
             history.push('/basic/locations')
-        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'a') {
+        } else if (event.ctrlKey && event.altKey && event.code === 'KeyA') {
             history.push('/basic/alerts')
-        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'r') {
+        } else if (event.ctrlKey && event.altKey && event.code === 'KeyR') {
             history.push('/basic/reports')
-        } else if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'c') {
+        } else if (event.ctrlKey && event.altKey && event.code === 'KeyV') {
             history.push('/basic/charts')
         }
+
+      } else {
+        if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'd') {
+            history.push('/dashboard/default')
+        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 's') {
+            history.push('/basic/search')
+        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'c') {
+            history.push('/basic/carts')
+        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'l') {
+            history.push('/basic/locations')
+        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'a') {
+            history.push('/basic/alerts')
+        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'r') {
+            history.push('/basic/reports')
+        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'v') {
+            history.push('/basic/charts')
+        }
+
+      }
     }
     componentWillUnmount() {
         window.removeEventListener('resize', this.resize)
