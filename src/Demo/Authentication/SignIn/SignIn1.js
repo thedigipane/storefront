@@ -22,7 +22,7 @@ class Signin1 extends React.Component {
             },
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         const { auth, history } = this.props;
         if (auth.isAuthenticated) {
             history.push('/');
@@ -31,8 +31,9 @@ class Signin1 extends React.Component {
     componentDidUpdate(prevProps) {
         const { error, auth, history } = this.props;
         if (error !== prevProps.error) {
-            console.log(error)
             if (error.id === 'LOGIN_FAIL') {
+                createNotification('error', error.msg)
+            } else if (error.id === 'NETWORK_ERROR') {
                 createNotification('error', error.msg)
             }
         }

@@ -5,13 +5,14 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
+    NETWORK_ERROR
 } from '../actions/types';
 import config from '../../config';
 // import { Cookies } from 'react-cookie';
-import { returnErrors } from './erroractions';
+import { returnErrors, returnNetworkError } from './erroractions';
 import axios from 'axios';
 import qs from 'querystring';
-import jwt from  'jsonwebtoken'; 
+import jwt from 'jsonwebtoken';
 export const loaduser = () => (dispatch, getSate) => {
     console.log(loadHeaders(getSate))
 }
@@ -27,7 +28,7 @@ export const login = (body) => (dispatch) => {
         if (error.response && error.response.status && (error.response.status === 404 || error.response.status === 400 || error.response.status === 401 || error.response.status === 500)) {
             dispatch(returnErrors(error.response.data, error.response.status, LOGIN_FAIL));
         } else if (error) {
-            dispatch(returnErrors(error.message, '', LOGIN_FAIL))
+            dispatch(returnNetworkError('Network Connection', '', NETWORK_ERROR))
         }
         dispatch({
             type: LOGIN_FAIL
@@ -81,5 +82,5 @@ export const setNewToken = (token) => {
     localStorage.setItem('mannkamal_user_token', token.split(' ')[1]);
 }
 export const jwtdecode = () => {
-   return jwt.decode(loadUserToken());
+    return jwt.decode(loadUserToken());
 }

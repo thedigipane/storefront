@@ -1,4 +1,4 @@
-import { GET_ERRORS, CLEAR_ERRORS } from '../actions/types';
+import { GET_ERRORS, CLEAR_ERRORS,NETWORK_ERROR } from '../actions/types';
 
 const initialState = {
     id: null,
@@ -20,6 +20,12 @@ export default function (state = initialState, action) {
                 status: null,
                 msg: {}
             }
+            case NETWORK_ERROR:
+                return {
+                    id: action.payload.id,
+                    status: action.payload.status,
+                    msg: action.payload.msg
+                }
         default:
             return state;
     }
