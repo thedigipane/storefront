@@ -26,7 +26,7 @@ class Navigation extends Component {
         window.addEventListener('keydown', this.renderNavigation);
     }
     renderNavigation = (event) => {
-      console.log("key pressed.", event);
+      // console.log("key pressed.", event);
       // console.log("event.ctrlKey: ", event.ctrlKey);
       // console.log("event.altKey: ", event.altKey);
       // console.log("String(event.key).toLowerCase()", String(event.key).toLowerCase());
@@ -35,42 +35,57 @@ class Navigation extends Component {
 
       const { history } = this.props;
 
-      if (navigator.appVersion.indexOf("Mac")!=-1) {
-        if (event.ctrlKey && event.altKey && event.code === 'KeyD') {
-            history.push('/dashboard/default')
-        } else if (event.ctrlKey && event.altKey && event.code === 'KeyS') {
-            history.push('/basic/search')
-        } else if (event.ctrlKey && event.altKey && event.code === 'KeyC') {
-            history.push('/basic/carts')
-        } else if (event.ctrlKey && event.altKey && event.code === 'KeyL') {
-            history.push('/basic/locations')
-        } else if (event.ctrlKey && event.altKey && event.code === 'KeyA') {
-            history.push('/basic/alerts')
-        } else if (event.ctrlKey && event.altKey && event.code === 'KeyR') {
-            history.push('/basic/reports')
-        } else if (event.ctrlKey && event.altKey && event.code === 'KeyV') {
-            history.push('/basic/charts')
-        }
+      if (!(event.ctrlKey && event.altKey)) {
+        return;
+      }
 
-      } else {
-        if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'd') {
-            history.push('/dashboard/default')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 's') {
-            history.push('/basic/search')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'c') {
-            history.push('/basic/carts')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'l') {
-            history.push('/basic/locations')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'a') {
-            history.push('/basic/alerts')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'r') {
-            history.push('/basic/reports')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'v') {
-            history.push('/basic/charts')
-        }
+      let keyPressed = String(event.key).toLowerCase();
+      if (navigator.appVersion.indexOf("Mac")!=-1) {
+        keyPressed = event.code;
+      }
+      // console.log('keypressed:', keyPressed);
+
+      switch (keyPressed) {
+        case 'KeyD':
+        case 'd':
+          history.push('/dashboard/default');
+          break;
+
+        case 'KeyS':
+        case 's':
+          history.push('/basic/search');
+          break;
+
+        case 'KeyC':
+        case 'c':
+          history.push('/basic/carts');
+          break;
+
+        case 'KeyL':
+        case 'l':
+          history.push('/basic/locations');
+          break;
+
+        case 'KeyA':
+        case 'a':
+          history.push('/basic/alerts');
+          break;
+
+        case 'KeyR':
+        case 'r':
+          history.push('/basic/reports');
+          break;
+
+        case 'KeyV':
+        case 'v':
+          history.push('/basic/charts');
+          break;
 
       }
+
     }
+
+
     componentWillUnmount() {
         window.removeEventListener('resize', this.resize)
         window.removeEventListener('keydown', this.renderNavigation);

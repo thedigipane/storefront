@@ -19,15 +19,13 @@ class ProductDetail extends Component {
 
     componentDidMount() {
         const { history, match: { params } } = this.props;
+        window.addEventListener('keydown', this.renderCosmeticClicks);
         Axios.get(`${Config.prod}/api/stock/component/${params.componentid}`, {
             params: {
                 token: loadUserToken()
             }
         }).then(({ data }) => {
             this.setState({ item: data[0], loading: false });
-            if (data[0]) {
-                window.addEventListener('keydown', this.renderCosmeticClicks);
-            }
         }).catch(error => {
             this.setState({ loading: false })
             createNotification('error', 'Please Login Again');
@@ -40,22 +38,67 @@ class ProductDetail extends Component {
     }
     renderCosmeticClicks = (event) => {
         // const { history } = this.props;
-        if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'a') {
-            this.renderProducts();
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'o') {
-            this.renderProducts();
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'p') {
-            alert('add product')
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'c') {
+        if (!(event.ctrlKey && event.altKey)) {
+          return;
+        }
 
-        } else if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'd') {
+        let keyPressed = String(event.key).toLowerCase();
+        if (navigator.appVersion.indexOf("Mac")!=-1) {
+          keyPressed = event.code;
+        }
+
+        switch (keyPressed) {
+          case 'KeyQ':
+          case 'q':
+            this.renderProducts();
+            break;
+
+          case 'KeyO':
+          case 'o':
+            this.renderProducts();
+            break;
+
+          case 'KeyP':
+          case 'p':
+            this.addProduct();
+            break;
+
+          case 'KeyW':
+          case 'w':
+            this.addtoCart();
+            break;
+
+          case 'KeyE':
+          case 'e':
+            this.renderDetail();
+            break;
 
         }
+    }
+    addProduct = () => {
+        createNotification('info', 'Add Product');
+    }
+    addtoCart = () => {
+        createNotification('info', 'Add to Cart');
     }
     renderProducts = () => {
         const { history } = this.props;
         const { item } = this.state;
-        history.push(`/basic/products/${item.idstock}/${item.idcmp}`);
+        if (item) {
+            if (item.idstock && item.idcmp) {
+                history.push(`/basic/products/${item.idstock}/${item.idcmp}`);
+            } else {
+                createNotification('info', 'Not Available');
+            }
+        } else {
+            createNotification('info', 'Not Available');
+        }
+
+    }
+    renderDetail = () => {
+        this.setState(state => ({
+            show: !state.show
+        }))
     }
     render() {
         const { show, item, loading, searchData } = this.state;

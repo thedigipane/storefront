@@ -27,9 +27,23 @@ class NavRight extends Component {
         window.removeEventListener('keydown', this.renderCosmeticClicks);
     }
     renderCosmeticClicks = (event) => {
-        if (event.ctrlKey && event.shiftKey && event.altKey && String(event.key).toLowerCase() === 'x') {
-            this.renderLoggedin();
-        }
+      if (!(event.ctrlKey && event.altKey)) {
+        return;
+      }
+      let keyPressed = String(event.key).toLowerCase();
+      if (navigator.appVersion.indexOf("Mac")!=-1) {
+        keyPressed = event.code;
+      }
+
+      switch (keyPressed) {
+        case 'KeyX':
+        case 'x':
+          this.renderLoggedin();
+          break;
+      }
+        // if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'x') {
+        //     this.renderLoggedin();
+        // }
     }
     logout = () => {
         const { history } = this.props;
