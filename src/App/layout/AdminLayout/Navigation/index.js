@@ -26,66 +26,55 @@ class Navigation extends Component {
         window.addEventListener('keydown', this.renderNavigation);
     }
     renderNavigation = (event) => {
-      // console.log("key pressed.", event);
-      // console.log("event.ctrlKey: ", event.ctrlKey);
-      // console.log("event.altKey: ", event.altKey);
-      // console.log("String(event.key).toLowerCase()", String(event.key).toLowerCase());
-      // console.log("navigator.userAgent: ", navigator.userAgent);
-      // console.log("navigator.appVersion: ", navigator.appVersion);
+        const { history } = this.props;
 
-      const { history } = this.props;
+        if (!(event.ctrlKey && event.altKey)) {
+            return;
+        }
 
-      if (!(event.ctrlKey && event.altKey)) {
-        return;
-      }
+        let keyPressed = String(event.key).toLowerCase();
+        if (navigator.appVersion.indexOf("Mac") != -1) {
+            keyPressed = event.code;
+        }
 
-      let keyPressed = String(event.key).toLowerCase();
-      if (navigator.appVersion.indexOf("Mac")!=-1) {
-        keyPressed = event.code;
-      }
-      // console.log('keypressed:', keyPressed);
+        switch (keyPressed) {
+            case 'KeyD':
+            case 'd':
+                history.push('/dashboard/default');
+                break;
 
-      switch (keyPressed) {
-        case 'KeyD':
-        case 'd':
-          history.push('/dashboard/default');
-          break;
+            case 'KeyS':
+            case 's':
+                history.push('/basic/search');
+                break;
 
-        case 'KeyS':
-        case 's':
-          history.push('/basic/search');
-          break;
+            case 'KeyC':
+            case 'c':
+                history.push('/basic/carts');
+                break;
 
-        case 'KeyC':
-        case 'c':
-          history.push('/basic/carts');
-          break;
+            case 'KeyL':
+            case 'l':
+                history.push('/basic/locations');
+                break;
 
-        case 'KeyL':
-        case 'l':
-          history.push('/basic/locations');
-          break;
+            case 'KeyA':
+            case 'a':
+                history.push('/basic/alerts');
+                break;
 
-        case 'KeyA':
-        case 'a':
-          history.push('/basic/alerts');
-          break;
+            case 'KeyR':
+            case 'r':
+                history.push('/basic/reports');
+                break;
 
-        case 'KeyR':
-        case 'r':
-          history.push('/basic/reports');
-          break;
+            case 'KeyV':
+            case 'v':
+                history.push('/basic/charts');
+                break;
 
-        case 'KeyV':
-        case 'v':
-          history.push('/basic/charts');
-          break;
-
-      }
-
+        }
     }
-
-
     componentWillUnmount() {
         window.removeEventListener('resize', this.resize)
         window.removeEventListener('keydown', this.renderNavigation);

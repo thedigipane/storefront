@@ -55,3 +55,25 @@ File: style.css
 @import "partials/other/icon-lauouts";
 
 @import "partials/third-party/third-party";
+
+#incdec{
+  display: inline-block;
+}
+#incdec input{
+width:40px;
+margin-right: 10px;
+text-align: center;
+}
+
+#incdec input::-webkit-outer-spin-button,
+#incdec input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+.modal{
+  padding-right:0px !important;
+}
+.custom-modal{
+  max-width:100%;
+  margin:0.2rem;
+}

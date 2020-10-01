@@ -20,7 +20,7 @@ class DataGrid extends Component {
         items: [],
         isLoading: false,
         check: false,
-        searchRef: ''
+        timeout: null
     };
     componentDidMount() {
         window.addEventListener('keydown', this.renderCosmeticClicks);
@@ -32,6 +32,7 @@ class DataGrid extends Component {
         // const { history } = this.props;
         if (event.ctrlKey && event.altKey && event.key == 0) {
             this.renderSearchField();
+            return
         }
         const { history } = this.props;
         const { items } = this.state;
@@ -42,28 +43,6 @@ class DataGrid extends Component {
             }
             return item;
         })
-    }
-    HandleInput = (e) => {
-        let search = e.target.value;
-        const { check } = this.state;
-        const { history } = this.props;
-        this.setState({
-            [e.target.name]: search
-        })
-
-        if (search.length > 2) {
-            Axios.get(`${Config.prod}/api/component/${check ? search : `search?q=${search}`}`, {
-                params: {
-                    token: loadUserToken()
-                }
-            }).then(({ data }) => {
-                // console.log(data);
-                this.setState({ items: data })
-            }).catch(error => {
-                createNotification('error', 'Please Login Again');
-                history.push('/auth/session')
-            })
-        }
     }
     searchOnHandler = () => {
         const { search } = this.state;
@@ -82,6 +61,46 @@ class DataGrid extends Component {
         let input = document.getElementById('m-search')
         input.focus()
     }
+    callSearchApi = (check, history, search) => {
+        Axios.get(`${Config.prod}/api/component/${check ? search : `search?q=${search}`}`, {
+            params: {
+                token: loadUserToken()
+            }
+        }).then(({ data }) => {
+            // console.log(data);
+            this.setState({ items: data })
+        }).catch(error => {
+            createNotification('error', 'Please Login Again');
+            history.push('/auth/session')
+        })
+    }
+    HandleInput = (e) => {
+        let search = e.target.value;
+        const { check, timeout } = this.state;
+        const { history } = this.props;
+        this.setState({
+            [e.target.name]: search
+        })
+
+        if (search.length > 2) {
+            this.debounce(() => {
+                this.callSearchApi(check, history, search)
+            }, 500)
+        } else {
+            clearTimeout(timeout)
+            this.setState({ timeout: null })
+        }
+    }
+    debounce = (func, wait) => {
+        let { timeout } = this.state;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func()
+        }, wait)
+        this.setState({
+            timeout: timeout
+        })
+    };
     render() {
         const { items, check } = this.state;
         const { history } = this.props;
@@ -113,7 +132,7 @@ class DataGrid extends Component {
                             <div className="form-group text-right mt-2">
                                 <div className="checkbox checkbox-fill d-inline" >
                                     <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" onClick={() => this.renderByCheckId(check)} />
-                                    <label htmlFor="checkbox-fill-a1" className="cr">Search By Id</label>
+                                    <label htmlFor="checkbox-fill-a1" className="cr">By Id</label>
                                 </div>
                             </div>
                         </Form>

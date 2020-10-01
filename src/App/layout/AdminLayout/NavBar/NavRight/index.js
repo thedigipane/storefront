@@ -19,31 +19,30 @@ class NavRight extends Component {
         loggedin: false
     };
     componentDidMount() {
-        const { fName, lName } = jwtdecode();
-        this.setState({ fName, lName })
-        window.addEventListener('keydown', this.renderCosmeticClicks);
+        if (jwtdecode()) {
+            const { fName, lName } = jwtdecode();
+            this.setState({ fName, lName })
+            window.addEventListener('keydown', this.renderCosmeticClicks);
+        }
     }
     componentWillUnmount() {
         window.removeEventListener('keydown', this.renderCosmeticClicks);
     }
     renderCosmeticClicks = (event) => {
-      if (!(event.ctrlKey && event.altKey)) {
-        return;
-      }
-      let keyPressed = String(event.key).toLowerCase();
-      if (navigator.appVersion.indexOf("Mac")!=-1) {
-        keyPressed = event.code;
-      }
+        if (!(event.ctrlKey && event.altKey)) {
+            return;
+        }
+        let keyPressed = String(event.key).toLowerCase();
+        if (navigator.appVersion.indexOf("Mac") != -1) {
+            keyPressed = event.code;
+        }
 
-      switch (keyPressed) {
-        case 'KeyX':
-        case 'x':
-          this.renderLoggedin();
-          break;
-      }
-        // if (event.ctrlKey && event.altKey && String(event.key).toLowerCase() === 'x') {
-        //     this.renderLoggedin();
-        // }
+        switch (keyPressed) {
+            case 'KeyX':
+            case 'x':
+                this.renderLoggedin();
+                break;
+        }
     }
     logout = () => {
         const { history } = this.props;

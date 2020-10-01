@@ -274,6 +274,32 @@ export default {
                     url: '/basic/carts',
                     icon: 'feather icon-shopping-cart'
                 }, {
+                    parent: {
+                        id: 'carts',
+                        title: 'Carts',
+                        type: 'item',
+                        url: '/basic/carts',
+                        icon: 'feather icon-shopping-cart'
+                    },
+                    id: 'cartdetail',
+                    title: 'Cart Detail',
+                    type: 'custom',
+                    url: '/basic/cartdetail',
+                    icon: 'feather icon-shopping-cart'
+                },{
+                    parent: {
+                        id: 'carts',
+                        title: 'Carts',
+                        type: 'item',
+                        url: '/basic/carts',
+                        icon: 'feather icon-shopping-cart'
+                    },
+                    id: 'newcart',
+                    title: 'New Cart',
+                    type: 'custom',
+                    url: '/basic/newcart',
+                    icon: 'feather icon-shopping-cart'
+                }, {
                     id: 'locations',
                     title: 'Locations',
                     type: 'item',

@@ -8,13 +8,15 @@ import Axios from 'axios';
 import { loadUserToken } from '../../../store/actions/authactions';
 import { createNotification } from '../../../index';
 import Loader from '../../../App/layout/Loader';
+import AddToCartModal from './addtocartmodal';
 
 class ProductDetail extends Component {
     state = {
         show: false,
         item: {},
         loading: true,
-        searchData: JSON.parse(localStorage.getItem('searchitem'))
+        searchData: JSON.parse(localStorage.getItem('searchitem')),
+        showAddToCartModal: false
     };
 
     componentDidMount() {
@@ -25,6 +27,7 @@ class ProductDetail extends Component {
                 token: loadUserToken()
             }
         }).then(({ data }) => {
+
             this.setState({ item: data[0], loading: false });
         }).catch(error => {
             this.setState({ loading: false })
@@ -39,39 +42,41 @@ class ProductDetail extends Component {
     renderCosmeticClicks = (event) => {
         // const { history } = this.props;
         if (!(event.ctrlKey && event.altKey)) {
-          return;
+            return;
         }
 
         let keyPressed = String(event.key).toLowerCase();
-        if (navigator.appVersion.indexOf("Mac")!=-1) {
-          keyPressed = event.code;
+        if (navigator.appVersion.indexOf("Mac") != -1) {
+            keyPressed = event.code;
         }
 
         switch (keyPressed) {
-          case 'KeyQ':
-          case 'q':
-            this.renderProducts();
-            break;
+            case 'KeyQ':
+            case 'q':
+                this.renderProducts();
+                break;
 
-          case 'KeyO':
-          case 'o':
-            this.renderProducts();
-            break;
+            case 'KeyO':
+            case 'o':
+                this.renderProducts();
+                break;
 
-          case 'KeyP':
-          case 'p':
-            this.addProduct();
-            break;
+            case 'KeyP':
+            case 'p':
+                this.addProduct();
+                break;
 
-          case 'KeyW':
-          case 'w':
-            this.addtoCart();
-            break;
+            case 'KeyW':
+            case 'w':
+                this.addtoCart();
+                break;
 
-          case 'KeyE':
-          case 'e':
-            this.renderDetail();
-            break;
+            case 'KeyE':
+            case 'e':
+                this.renderDetail();
+                break;
+                default:
+                    return;
 
         }
     }
@@ -79,7 +84,9 @@ class ProductDetail extends Component {
         createNotification('info', 'Add Product');
     }
     addtoCart = () => {
-        createNotification('info', 'Add to Cart');
+        this.setState(state => ({
+            showAddToCartModal: !state.showAddToCartModal
+        }))
     }
     renderProducts = () => {
         const { history } = this.props;
@@ -101,7 +108,8 @@ class ProductDetail extends Component {
         }))
     }
     render() {
-        const { show, item, loading, searchData } = this.state;
+        const { show, item, loading, searchData, showAddToCartModal } = this.state;
+        const { history } = this.props;
         return (
             <Aux>
                 {
@@ -109,7 +117,6 @@ class ProductDetail extends Component {
                         <Row>
                             <Col className="col-12 col-md-4">
                                 <Card >
-
                                     <Card.Body>
                                         <h6  > {searchData.companyname}</h6>
                                         {
@@ -135,12 +142,12 @@ class ProductDetail extends Component {
                             <Card.Body>
                                 <Row>
                                     <Col className="col-12 col-sm-6 d-flex justify-content-around">
-                                        <Button size="lg" variant="primary" onClick={() => this.renderProducts()} ><b>{item ? item.availablequantity : ''}</b> Available</Button>
-                                        <Button size="lg" variant="primary" onClick={() => this.renderProducts()}><b>{item ? item.orderedquantity : ''}</b> Ordered</Button>
+                                        <Button size="lg" variant="primary" onClick={() => this.renderProducts()} ><b>{item ? item.availablequantity : 0}</b> Available</Button>
+                                        <Button size="lg" variant="primary" onClick={() => this.renderProducts()}><b>{item ? item.orderedquantity : 0}</b> Ordered</Button>
                                     </Col>
                                     <Col className="col-12 col-sm-6 d-flex justify-content-around" >
-                                        <Button size="lg" variant="primary">Add Product</Button>
-                                        <Button size="lg" variant="primary">Add to Cart</Button>
+                                        <Button size="lg" variant="primary" onClick={() => this.addProduct()}>Add Product</Button>
+                                        <Button size="lg" variant="primary" onClick={() => this.addtoCart()}>Add to Cart</Button>
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -184,6 +191,9 @@ class ProductDetail extends Component {
                             </Collapse>
                         </Card>
                     </>) : <Loader />
+                }
+                {
+                    showAddToCartModal ? <AddToCartModal idstock={item && item.idstock} addtoCart={this.addtoCart} history={history} /> : ''
                 }
             </Aux>
         );

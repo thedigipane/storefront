@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { isUserAuthenticated, setNewToken } from './store/actions/authactions';
+import { isUserAuthenticated, jwtdecode, setNewToken } from './store/actions/authactions';
 import Axios from 'axios';
 import config from './config';
 import Loader from './App/layout/Loader';
@@ -17,6 +17,7 @@ export default function (ComposedComponent) {
         }
         componentDidMount() {
             const { history } = this.props;
+            const JWTDEOCDED = jwtdecode();
             // get(`${config.prod}/api/token`,{data:{token:localStorage.getItem('mannkamal_user_token')}})
             // Axios.get(`${config.prod}/api/token`, {token:localStorage.getItem('mannkamal_user_token')}).then(result => {
             //     this.setState({ valid: true })
@@ -24,8 +25,9 @@ export default function (ComposedComponent) {
 
             // })
             if (localStorage.getItem('mannkamal_user_token')) {
+
                 Axios(`${config.prod}/api/token`, {
-                    method: 'GET', // or 'PUT'
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -37,11 +39,11 @@ export default function (ComposedComponent) {
                             this.setState({ valid: true })
                         } else {
                             Axios(`${config.prod}/api/token`, {
-                                method: 'POST', // or 'PUT'
+                                method: 'POST', 
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: qs.stringify({ username: 'adureg', token: localStorage.getItem('mannkamal_user_refresh') }),
+                                body: qs.stringify({ username: JWTDEOCDED ? JWTDEOCDED.username : '', token: localStorage.getItem('mannkamal_user_refresh') }),
                             }).then(({ data: { token } }) => {
                                 setNewToken(token);
                                 this.props.validateRoute(true);

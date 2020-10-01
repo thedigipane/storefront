@@ -17,7 +17,11 @@ const UIBasicBasicTypography = React.lazy(() => import('./Demo/UIElements/Basic/
 const Search = React.lazy(() => import('./Demo/UIElements/Basic/search'));
 const ProductDetail = React.lazy(() => import('./Demo/UIElements/Basic/productdetail'));
 const Products = React.lazy(() => import('./Demo/UIElements/Basic/products'));
+
 const Carts = React.lazy(() => import('./Demo/UIElements/Basic/cart'));
+const CartDetail = React.lazy(() => import('./Demo/UIElements/Basic/cartdetail'));
+const NewCart = React.lazy(() => import('./Demo/UIElements/Basic/NewCart'));
+
 const Alerts = React.lazy(() => import('./Demo/UIElements/Basic/alert'));
 const Reports = React.lazy(() => import('./Demo/UIElements/Basic/report'));
 const Locations = React.lazy(() => import('./Demo/UIElements/Basic/location'));
@@ -47,11 +51,14 @@ const routes = [
     { path: '/basic/detail/:componentid', exact: true, name: 'ProductDetail', component: RequireAuth(ProductDetail) },
     { path: '/basic/products/:stockid/:componentid', exact: true, name: 'Products', component: RequireAuth(Products) },
     { path: '/basic/carts', exact: true, name: 'Cart', component: RequireAuth(Carts) },
+    { path: '/basic/cartdetail/:id', exact: true, name: 'CartDetail', component: RequireAuth(CartDetail) },
+    { path: '/basic/newcart', exact: true, name: 'NewCart', component: RequireAuth(NewCart) },
+
     { path: '/basic/alerts', exact: true, name: 'Alert', component: RequireAuth(Alerts) },
     { path: '/basic/reports', exact: true, name: 'Report', component: RequireAuth(Reports) },
     { path: '/basic/charts', exact: true, name: 'Chart', component: RequireAuth(Charts) },
     { path: '/basic/locations', exact: true, name: 'Location', component: RequireAuth(Locations) },
-    
+
     { path: '/tables/bootstrap', exact: true, name: 'Bootstrap Table', component: BootstrapTable },
     { path: '/charts/nvd3', exact: true, name: 'Nvd3 Chart', component: Nvd3Chart },
     { path: '/maps/google-map', exact: true, name: 'Google Map', component: GoogleMap },
