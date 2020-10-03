@@ -161,7 +161,7 @@ class AddToCartModal extends Component {
                                         <option disabled>Select</option>
                                         {
                                             items.map((item, index) => (
-                                                <option value={index} key={index}>{item.idcart}:{item.idPO}:{item.costcenterid}</option>
+                                                <option value={index} key={index}>Cart: {item.idcart}, PO: {item.idPO}, CostCenter: {item.costcenterid}</option>
                                             ))
                                         }
                                     </Form.Control>
