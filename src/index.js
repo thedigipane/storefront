@@ -11,6 +11,7 @@ import config from './config';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import Store from './store';
 import 'react-notifications/lib/notifications.css';
+
 // const store = createStore(reducer);
 
 function createNotification(type, value) {

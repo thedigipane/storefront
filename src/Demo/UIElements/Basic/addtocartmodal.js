@@ -6,7 +6,7 @@ import Axios from 'axios';
 import { loadUserToken } from '../../../store/actions/authactions';
 import config from '../../../config';
 import { createNotification } from '../../..';
-
+import Select from 'react-select';
 class AddToCartModal extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +14,8 @@ class AddToCartModal extends Component {
             show: true,
             items: [],
             item: null,
-            quantity: 1
+            quantity: 1,
+            itemshow: false
         }
     }
     componentDidMount() {
@@ -77,14 +78,17 @@ class AddToCartModal extends Component {
             this.props.addtoCart()
         }, 1000)
     }
-    renderSelect=()=>{
-        let select= document.getElementById('select');
-        select.focus();
+    renderSelect = () => {
+        console.log('select')
+        this.setState(state => ({
+            itemshow: !state.itemshow
+        }))
     }
-    renderItem = (items, index) => {
+    renderItem = (item) => {
         this.setState({
-            item: items[index]
+            item: item
         })
+        // this.renderSelect();
     }
     incrementQuantity = () => {
         this.setState(state => ({
@@ -138,7 +142,7 @@ class AddToCartModal extends Component {
         })
     }
     render() {
-        const { show, items, item, quantity } = this.state;
+        const { show, items, item, quantity, itemshow } = this.state;
         return (
             <Aux>
                 <Modal
@@ -152,19 +156,12 @@ class AddToCartModal extends Component {
                         <Card>
                             <Card.Body>
                                 <Form.Group as={Col} className="p-0" >
-                                    <Form.Control
-                                    id="select"
-                                        as="select"
-                                        defaultValue="Select"
-                                        onChange={(e) => this.renderItem(items, e.target.value)}
-                                    >
-                                        <option disabled>Select</option>
-                                        {
-                                            items.map((item, index) => (
-                                                <option value={index} key={index}>Cart: {item.idcart}, PO: {item.idPO}, CostCenter: {item.costcenterid}</option>
-                                            ))
-                                        }
-                                    </Form.Control>
+                                    <Select options={items.map(item => { return { label: `${item.idcart}:${item.idPO}:${item.costcenterid}`, value: item } })}
+                                        openMenuOnClick={() => this.renderSelect()}
+                                        onFocus={() => this.renderSelect()}
+                                        onBlur={() => this.renderSelect()} onChange={(e) => {
+                                            this.renderItem(e.value)
+                                        }} menuIsOpen={itemshow} />
                                 </Form.Group>
 
                                 <h6><b>Cart:</b> {item && item.idcart}</h6>

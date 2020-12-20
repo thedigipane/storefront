@@ -164,7 +164,7 @@ class DataGrid extends Component {
                                         <div>
                                             <h6  ><b>Taxonomy:</b> {item.taxonomy}</h6>
                                             <h6>
-                                                <b>Elastomerdescription: </b>{item.elastomers}
+                                                <b>Elastomerdescription: </b>{item.elastomerdescription}
                                             </h6>
                                             <h6  ><b>Stockroomlabel: </b>{item.stockroomlabel}</h6>
                                         </div>

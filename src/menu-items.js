@@ -286,7 +286,7 @@ export default {
                     type: 'custom',
                     url: '/basic/cartdetail',
                     icon: 'feather icon-shopping-cart'
-                },{
+                }, {
                     parent: {
                         id: 'carts',
                         title: 'Carts',
@@ -305,18 +305,42 @@ export default {
                     type: 'item',
                     url: '/basic/locations',
                     icon: 'feather icon-map-pin'
-                }, {
+                },
+                {
+                    id: 'reports',
+                    title: 'Reports',
+                    type: 'collapse',
+                    icon: 'feather icon-flag',
+                    children: [
+                        {
+                            id: 'shipment',
+                            title: 'Shipments',
+                            type: 'item',
+                            url: '/basic/reports/shipments',
+                            icon: 'feather icon-package'
+                        },
+                        {
+                            parent: {
+                                id: 'shipment',
+                                title: 'Shipments',
+                                type: 'item',
+                                url: '/basic/reports/shipments',
+                                icon: 'feather icon-truck'
+                            },
+                            id: 'timeline',
+                            title: 'Timeline',
+                            type: 'custom',
+                            url: '/basic/reports/timeline',
+                            icon: 'feather icon-clock'
+                        }
+                    ]
+                },
+                {
                     id: 'alerts',
                     title: 'Alerts',
                     type: 'item',
                     url: '/basic/alerts',
                     icon: 'feather icon-alert-triangle'
-                }, {
-                    id: 'reports',
-                    title: 'Reports',
-                    type: 'item',
-                    url: '/basic/reports',
-                    icon: 'feather icon-server'
                 }, {
                     id: 'charts',
                     title: 'Charts',
@@ -325,6 +349,6 @@ export default {
                     icon: 'feather icon-map'
                 }
             ]
-        }
+        },
     ]
 }

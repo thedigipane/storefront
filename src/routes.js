@@ -23,9 +23,14 @@ const CartDetail = React.lazy(() => import('./Demo/UIElements/Basic/cartdetail')
 const NewCart = React.lazy(() => import('./Demo/UIElements/Basic/NewCart'));
 
 const Alerts = React.lazy(() => import('./Demo/UIElements/Basic/alert'));
-const Reports = React.lazy(() => import('./Demo/UIElements/Basic/report'));
+// const Reports = React.lazy(() => import('./Demo/UIElements/Basic/report'));
+const Shipments = React.lazy(() => import('./Demo/UIElements/Basic/reports/shipments'));
+const Timeline = React.lazy(() => import('./Demo/UIElements/Basic/reports/timeline'));
+const TimelineDetail = React.lazy(() => import('./Demo/UIElements/Basic/reports/timelinedetail'));
+
 const Locations = React.lazy(() => import('./Demo/UIElements/Basic/location'));
 const Charts = React.lazy(() => import('./Demo/UIElements/Basic/charts'));
+
 // const FormsElements = React.lazy(() => import('./Demo/Forms/FormsElements'));
 
 const BootstrapTable = React.lazy(() => import('./Demo/Tables/BootstrapTable'));
@@ -55,7 +60,10 @@ const routes = [
     { path: '/basic/newcart', exact: true, name: 'NewCart', component: RequireAuth(NewCart) },
 
     { path: '/basic/alerts', exact: true, name: 'Alert', component: RequireAuth(Alerts) },
-    { path: '/basic/reports', exact: true, name: 'Report', component: RequireAuth(Reports) },
+    // { path: '/basic/reports', exact: true, name: 'Report', component: RequireAuth(Reports) },
+    { path: '/basic/reports/shipments', exact: true, name: 'Shipments', component: RequireAuth(Shipments) },
+    { path: '/basic/reports/timeline/:id', exact: true, name: 'Timeline', component: RequireAuth(Timeline) },
+    { path: '/basic/reports/timeline/detail/:id', exact: true, name: 'Detail', component: RequireAuth(TimelineDetail) },
     { path: '/basic/charts', exact: true, name: 'Chart', component: RequireAuth(Charts) },
     { path: '/basic/locations', exact: true, name: 'Location', component: RequireAuth(Locations) },
 

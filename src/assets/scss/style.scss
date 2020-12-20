@@ -55,6 +55,7 @@ File: style.css
 @import "partials/other/icon-lauouts";
 
 @import "partials/third-party/third-party";
+@import "~react-vertical-timeline-component/style.min.css";
 
 #incdec{
   display: inline-block;
@@ -76,4 +77,18 @@ text-align: center;
 .custom-modal{
   max-width:100%;
   margin:0.2rem;
+}
+button:disabled{
+  cursor:not-allowed;
+}
+.bg-sunny-morning{
+  background-image: linear-gradient(120deg,#f6d365,#fda085);
+  color:white;
+}
+.vertical-timeline::before{
+  background:#dedede;
+}
+.vertical-timeline-element-content{
+  box-shadow: none;
+  -webkit-box-shadow:none;
 }

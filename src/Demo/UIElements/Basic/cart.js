@@ -60,7 +60,7 @@ class CartComponent extends Component {
 
         }
         items.map((item, index) => {
-            if (event.key == index+1) {
+            if (event.key == index + 1) {
                 history.push('/basic/cartdetail/' + item.idcart)
             }
             return item;
