@@ -156,12 +156,14 @@ class AddToCartModal extends Component {
                         <Card>
                             <Card.Body>
                                 <Form.Group as={Col} className="p-0" >
-                                    <Select options={items.map(item => { return { label: `${item.idcart}:${item.idPO}:${item.costcenterid}`, value: item } })}
-                                        openMenuOnClick={() => this.renderSelect()}
-                                        onFocus={() => this.renderSelect()}
-                                        onBlur={() => this.renderSelect()} onChange={(e) => {
+                                    <Select
+                                        ref={r => {
+                                            this.refs = r;
+                                        }}
+                                        options={items.map(item => { return { label: `${item.idcart}:${item.idPO}:${item.costcenterid}`, value: item } })}
+                                        onChange={(e) => {
                                             this.renderItem(e.value)
-                                        }} menuIsOpen={itemshow} />
+                                        }} />
                                 </Form.Group>
 
                                 <h6><b>Cart:</b> {item && item.idcart}</h6>

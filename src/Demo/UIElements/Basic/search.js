@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, Form } from 'react-bootstrap';
+import { Row, Col, Card, Form, FormGroup, FormControl, Modal, Button } from 'react-bootstrap';
 import DEMO from '../../../store/constant';
 import windowSize from 'react-window-size';
 import Config from '../../../config';
@@ -7,6 +7,8 @@ import Aux from "../../../hoc/_Aux";
 import Axios from 'axios';
 import { loadUserToken } from '../../../store/actions/authactions';
 import { createNotification } from '../../../index';
+import { FaShoppingCart } from 'react-icons/fa';
+import Select from 'react-select';
 let style = {
     width: "100%",
     background: 'none',
@@ -20,10 +22,34 @@ class DataGrid extends Component {
         items: [],
         isLoading: false,
         check: false,
-        timeout: null
+        timeout: null,
+        selectedcheckbox: [],
+        showAddToCartModal: false,
+        show: false,
+        carts: [],
+        cart: null,
+        itemshow: false
     };
     componentDidMount() {
         window.addEventListener('keydown', this.renderCosmeticClicks);
+        const { history } = this.props;
+        Axios.get(Config.prod + '/api/cart/all', {
+            params: {
+                token: loadUserToken()
+            }
+        }).then(({ data }) => {
+            this.setState({
+                carts: data
+            })
+        }).catch(error => {
+            if (error.response && error.response.status === 400) {
+                createNotification('error', error.response.data.error);
+            } else {
+                createNotification('error', 'Please Login Again');
+                this.setState({ loading: false })
+                history.push('/auth/session')
+            }
+        })
     }
     componentWillUnmount() {
         window.removeEventListener('keydown', this.renderCosmeticClicks);
@@ -70,8 +96,13 @@ class DataGrid extends Component {
             // console.log(data);
             this.setState({ items: data })
         }).catch(error => {
-            createNotification('error', 'Please Login Again');
-            history.push('/auth/session')
+            if (error.response && error.response.status === 400) {
+                createNotification('error', error.response.data.error);
+            } else {
+                createNotification('error', 'Please Login Again');
+                this.setState({ loading: false })
+                history.push('/auth/session')
+            }
         })
     }
     HandleInput = (e) => {
@@ -101,8 +132,80 @@ class DataGrid extends Component {
             timeout: timeout
         })
     };
+    renderSelectedCheckbox = (id) => {
+        const { selectedcheckbox } = this.state;
+        const check = selectedcheckbox.findIndex(item => item === id);
+        if (check !== -1) {
+            selectedcheckbox.splice(check, 1);
+            this.setState({
+                selectedcheckbox
+            })
+        } else {
+            selectedcheckbox.push(id)
+            this.setState({
+                selectedcheckbox
+            })
+        }
+    }
+    onCancelCheckout = () => {
+        this.setState(state => ({
+            showAddToCartModal: !state.showAddToCartModal,
+            show: !state.show
+        }))
+    }
+    renderAddtocartbutton = () => {
+        const { history } = this.props;
+        const { selectedcheckbox, cart } = this.state;
+        if (selectedcheckbox.length == 0) {
+            createNotification('error', 'Please Select Atleast One Item');
+            return;
+        }
+        Axios.post(`${Config.prod}/api/cart/${cart.idcart}/products`, { cmpIds: selectedcheckbox }, {
+            params: {
+                token: loadUserToken()
+            }
+        }).then(({ data }) => {
+
+            console.log(data);
+            if (data.code === 'ER_DUP_ENTRY') {
+                createNotification('error', data.message);
+            } else {
+                createNotification('success', 'Added To Cart');
+                this.onCancelCheckout();
+            }
+            // this.setState({ items: data })
+        }).catch(error => {
+            if (error.response && error.response.status === 400) {
+                this.onCancelCheckout()
+                createNotification('error', error.response.data.error);
+            } else {
+                createNotification('error', 'Please Login Again');
+                this.setState({ loading: false })
+                history.push('/auth/session')
+            }
+        })
+    }
+    renderSelect = () => {
+        this.setState(state => ({
+            itemshow: !state.itemshow
+        }))
+    }
+    renderItem = (item) => {
+        this.setState({
+            cart: item
+        })
+    }
+    addToCart = () => {
+        const { cart } = this.state;
+        if (!cart) {
+            createNotification('error', 'Please Select Cart');
+            return;
+        }
+        this.renderAddtocartbutton();
+    }
+
     render() {
-        const { items, check } = this.state;
+        const { items, check, showAddToCartModal, show, itemshow, carts, cart } = this.state;
         const { history } = this.props;
         return (
             <Aux>
@@ -120,9 +223,6 @@ class DataGrid extends Component {
                             <a href={DEMO.BLANK_LINK} className="input-group-append search-close" onClick={() => this.searchOffHandler()}>
                                 <i className="feather icon-x input-group-text" style={{ fontSize: '22px' }} />
                             </a>
-                            {/* <span className="input-group-append search-btn btn btn-primary" onClick={this.searchOnHandler}>
-                                <i className="feather icon-search input-group-text" />
-                            </span> */}
                         </div>
                     </div>
                 </div>
@@ -141,8 +241,8 @@ class DataGrid extends Component {
                 <Row >
                     {
                         items.map((item, index) => (
-                            <Col className="col-12 col-sm-6 col-lg-4  mb-2" key={index}>
-                                <Card style={{ borderRadius: '5px', cursor: 'pointer' }} onClick={() => {
+                            <Col className="col-12 col-sm-6 col-lg-4  mb-2 bg-white" key={index}>
+                                <Card className="mb-0" style={{ borderRadius: '5px', cursor: 'pointer', background: 'none', boxShadow: 'none' }} onClick={() => {
                                     history.push(`/basic/detail/${item.componentid}`);
                                     localStorage.setItem('searchitem', JSON.stringify(item));
                                 }} >
@@ -160,20 +260,69 @@ class DataGrid extends Component {
                                             {/* <h6  ><b>Supplier-Company:</b> {item.companyname}</h6> */}
                                         </Col>
                                     </Row>
-                                    <Card.Body>
+                                    <Card.Body className="py-0">
                                         <div>
                                             <h6  ><b>Taxonomy:</b> {item.taxonomy}</h6>
                                             <h6>
                                                 <b>Elastomerdescription: </b>{item.elastomerdescription}
                                             </h6>
-                                            <h6  ><b>Stockroomlabel: </b>{item.stockroomlabel}</h6>
+                                            <h6 ><b>Stockroomlabel: </b>{item.stockroomlabel}</h6>
                                         </div>
                                     </Card.Body>
                                 </Card>
+                                <div className="text-right">
+                                    <div className="checkbox checkbox-fill d-inline" >
+                                        <input type="checkbox" name={`checkbox-fill-item-${index}`} id={`checkbox-fill-item-${index}`} onClick={() => this.renderSelectedCheckbox(item.componentid)} />
+                                        <label htmlFor={`checkbox-fill-item-${index}`} className="cr"></label>
+                                    </div>
+                                </div>
                             </Col>
                         ))
                     }
                 </Row>
+                <div className="search-add-to-cart-button" onClick={() => {
+                    this.setState({ cart: null })
+                    this.onCancelCheckout()
+                }}>
+                    <FaShoppingCart />
+                </div>
+                {
+                    showAddToCartModal ?
+                        <Modal
+                            size="md"
+                            show={show}
+                            onHide={() => this.onCancelCheckout()}
+                            aria-labelledby="example-modal-sizes-title-lg"
+                            centered>
+                            <Card>
+                                <Card.Body>
+                                    <Form.Group as={Col} className="p-0" >
+                                        <Select
+                                            ref={r => {
+                                                this.refs = r;
+                                            }}
+                                            options={carts.map(item => { return { label: `${item.idcart}:${item.idPO}:${item.costcenterid}`, value: item } })}
+                                            onChange={(e) => {
+                                                this.renderItem(e.value)
+                                            }}
+                                        />
+                                    </Form.Group>
+
+                                    <h6><b>Cart:</b> {cart && cart.idcart}</h6>
+                                    <h6><b>PO:</b> {cart && cart.idPO}</h6>
+
+                                </Card.Body>
+                            </Card>
+                            <Row className="px-3">
+                                <Col>
+                                    <Button variant="danger" onClick={() => this.onCancelCheckout()}>Cancel</Button>
+                                </Col>
+                                <Col className="text-right" onClick={() => this.addToCart()}>
+                                    <Button >Add</Button>
+                                </Col>
+                            </Row>
+                        </Modal> : ''
+                }
             </Aux>
         );
     }
