@@ -139,7 +139,7 @@ class Breadcrumb extends Component {
 
         }
 
-        document.title = title + ' | Datta Able Free React + Redux Admin Template';
+        document.title = title + ' Store';
         return (
             <Aux>
                 {breadcrumb}

@@ -85,9 +85,9 @@ class CartComponent extends Component {
                             <Col className="col-12 col-sm-6 col-lg-4  mb-2" key={index}>
                                 <Card style={{ borderRadius: '5px', cursor: 'pointer' }} onClick={() => history.push('/basic/cartdetail/' + item.idcart)}>
                                     <Card.Body>
-                                        <h6  ><b>Desription: </b>{item.description}</h6>
-                                        <h6  ><b>idCart: </b>{item.idcart}</h6>
-                                        <h6  ><b>idPO: </b>{item.idPO}</h6>
+                                    <h5  ><b>{item.description}</b></h5>
+                                        <h6  ><b>Cart ID: </b>{item.idcart}</h6>
+                                        <h6  ><b>Order Confitmation ID: </b>{item.idPO}</h6>
                                         <h6  ><b>Job Name: </b>{item.jobname}</h6>
                                     </Card.Body>
                                 </Card>

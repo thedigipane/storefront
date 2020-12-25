@@ -253,16 +253,16 @@ class DataGrid extends Component {
                                             }
                                         </Col>
                                         <Col className="col-7 pt-3 text-right pr-3">
-                                            <h6  ><b>Description: </b>{item.categorydescription}</h6>
-                                            <h6  ><b>ID: </b>{item.componentid}</h6>
-                                            <h6  ><b>Company Name:</b> {item.companyname}</h6>
-                                            <h6  ><b>Model:</b> {item.mfgmodelnumber}</h6>
+                                            <h6  ><b>{item.categorydescription}</b></h6>
+                                            <h6  >C-ID: <b>{item.componentid}</b></h6>
+                                            <h6  >Company: <b>{item.companyname}</b></h6>
+                                            <h6  >Model: <b>{item.mfgmodelnumber}</b></h6>
                                             {/* <h6  ><b>Supplier-Company:</b> {item.companyname}</h6> */}
                                         </Col>
                                     </Row>
                                     <Card.Body className="py-0">
                                         <div>
-                                            <h6  ><b>Taxonomy:</b> {item.taxonomy}</h6>
+                                            <h6  ><b>Taxonomy: </b> {item.taxonomy}</h6>
                                             <h6>
                                                 <b>Elastomerdescription: </b>{item.elastomerdescription}
                                             </h6>

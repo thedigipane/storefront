@@ -7,6 +7,8 @@ import Aux from "../../../../hoc/_Aux";
 import Axios from 'axios';
 import { loadUserToken } from '../../../../store/actions/authactions';
 import { createNotification } from '../../../../index';
+import moment from 'moment';
+
 let style = {
     width: "100%",
     background: 'none',
@@ -135,11 +137,11 @@ class ShipmentComponent extends Component {
                                     className={item.status === 1 ? "bg-sunny-morning" : 'bg-info text-white'}
                                     style={{ borderRadius: '5px', cursor: 'pointer' }} onClick={(e) => this.renderToTimeline(item)}>
                                     <Card.Body>
-                                        <p className="mb-2">JobName: <b>{item.jobname}</b></p>
-                                        <p className="mb-2">CostCenterId: <b>{item.costcenterid}</b></p>
-                                        <p className="mb-5">idOC: <b>{item.idOC}</b></p>
-                                        <p className="mb-2">{item.createdOn}</p>
-                                        <p className="mb-2">{item.fname}:{item.lname}</p>
+                                        <p className="mb-2"><b>{item.jobname}</b></p>
+                                        <p className="mb-2">Cost Center Id: <b>{item.costcenterid}</b></p>
+                                        <p className="mb-5">OC Id: <b>{item.idOC}</b></p>
+                                        <p className="mb-2">{moment(item.createdOn).format('ddd DD MMM-YYYY hh:mm A')}</p>
+                                        <p className="mb-2">{item.fname} {item.lname}</p>
                                     </Card.Body>
                                 </Card>
                             </Col>

@@ -256,13 +256,13 @@ class CartDetailComponent extends Component {
                             <Card.Body>
                                 <Row >
                                     <Col className="col-12 col-sm-6">
-                                        <h6  ><b>idCart: </b>{item && item.idcart}</h6>
-                                        <h6  ><b>idPO: </b>{item && item.idPO}</h6>
-                                        <h6  ><b>Description: </b>{item && item.description}</h6>
-                                        <h6  ><b>JobName: </b>{item && item.jobname}</h6>
+                                    <h5><b>{item && item.description}</b></h5>
+                                        <h6  ><b>Cart Id: </b>{item && item.idcart}</h6>
+                                        <h6  ><b>OC Id: </b>{item && item.idPO}</h6>                                        
+                                        <h6  ><b>Job Name: </b>{item && item.jobname}</h6>
                                     </Col>
                                     <Col className="col-12 col-sm-6">
-                                        <h6  ><b>CostCenterId: </b>{item && item.costcenterid}</h6>
+                                        <h6  ><b>Cost Center Id: </b>{item && item.costcenterid}</h6>
                                     </Col>
                                 </Row>
                             </Card.Body>
