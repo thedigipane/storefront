@@ -92,7 +92,7 @@ class TimelineComponent extends Component {
                   <a
                     href="#"
                     style={{
-                      color: item.status === 1 ? "green" : "blue",
+                      color: item.status === 1 ? "orange" : "blue",
                       cursor: "pointer",
                     }}
                     onClick={(e) => this.renderTotimedetail(item)}
