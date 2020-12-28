@@ -11,7 +11,13 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { FaSchool, FaHome } from "react-icons/fa";
+import {
+  FaSchool,
+  FaHome,
+  FaShoppingCart,
+  FaTruck,
+  FaTruckPickup,
+} from "react-icons/fa";
 import Loader from "../../../../App/layout/Loader";
 import moment from "moment";
 
@@ -80,7 +86,7 @@ class TimelineComponent extends Component {
                   borderRight: "7px solid  rgb(33, 150, 243)",
                 }}
                 iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
-                icon={<FaSchool />}
+                icon={item.status === 1 ? <FaTruckPickup /> : <FaTruck />}
               >
                 <p className="vertical-timeline-element-title my-0">
                   <span
