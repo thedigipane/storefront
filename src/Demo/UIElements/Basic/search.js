@@ -285,9 +285,10 @@ class DataGrid extends Component {
         <Row>
           {items.map((item, index) => (
             <Col
-              className="col-12 col-sm-6 col-lg-4  mb-2 bg-white"
+              className="col-12 col-sm-6 col-lg-4  mb-2 px-1"
               key={index}
             >
+              <div className="bg-white h-100">
               <Card
                 className="mb-0"
                 style={{
@@ -358,6 +359,8 @@ class DataGrid extends Component {
                     className="cr"
                   ></label>
                 </div>
+              </div>
+            
               </div>
             </Col>
           ))}

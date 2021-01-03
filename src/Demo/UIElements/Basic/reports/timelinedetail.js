@@ -67,92 +67,144 @@ class TimelineDetailComponent extends Component {
                     }}
                     content={() => this.componentRef}
                 />
-                <div className="bg-white p-3" ref={el => (this.componentRef = el)}>
-                    <table className="table ">
+                <div className="p-3" ref={el => (this.componentRef = el)}>
+                    <Table borderless>
                         <tbody>
-                            <tr>
-                                <td>
-                                    {
-                                        shipment && (
-                                            <div
-                                                style={{
-                                                    height: 'auto',
-                                                    maxWidth: '150px',
-                                                    border: '5px solid #dedede',
-                                                    padding: '7px'
-                                                }}>
-                                                <img src={shipment && shipment.image} alt="no image"
-                                                    style={{
-                                                        width: '100%',
-                                                        height: 'auto'
-                                                    }}
-                                                />
+                            <tr className="bg-white">
+                                <td style={{ border: 'none' }}>
+                                    <tr>
+                                        <td style={{ border: 'none' }} >
+                                            {
+                                                shipment && (
+                                                    <div
+                                                        style={{
+                                                            maxWidth: '150px',
+                                                            height: '95px',
+                                                            padding: '7px'
+                                                        }}>
+                                                        <img src={shipment && shipment.image} alt="no image"
+                                                            style={{
+                                                                width: '100%',
+                                                                height: 'auto'
+                                                            }}
+                                                        />
+                                                    </div>
+                                                )
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ border: 'none' }}>
+                                            <div style={{
+                                                height: '150px',
+                                                background: '#e6e6e6',
+                                                borderRadius: '5px',
+                                                padding: '10px',
+                                                display: 'inline-block',
+                                                width:'235px'
+                                            }} >
+                                                <p className="mb-0" style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>
+                                                    Order # {shipment && shipment.orderConfirmationCode}
+                                                </p>
+                                                <p className="mb-0" style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>
+                                                    {
+                                                        job && (
+                                                            <>{job.fname} {job.lname}</>
+                                                        )
+                                                    }
+                                                </p>
+
+                                                <div className="text-left" style={{ fontWeight: 'bold' }}>
+                                                    <p className="mb-0">ID: {shipment && shipment.idcart_tx}</p>
+                                                    <p>Date: {shipment && moment(shipment.creaatedon).format('MMM-DD-YYYY')}</p>
+                                                </div>
                                             </div>
-                                        )
-                                    }
+                                        </td>
+                                    </tr>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td>
+
+                                <td style={{ border: 'none' }}>
                                     <div className="text-left ml-auto "
                                         style={{
-                                            height: '160px',
-                                            width: '250px',
+                                            height: '300px',
+                                            width: "400px",
                                             background: '#dedede',
                                             borderRadius: '10px',
                                             padding: '10px',
-                                            display: 'flex',
-                                            justifyContent: 'space-evenly',
-                                            flexDirection: 'column'
+
                                         }}>
                                         <div ><h3 style={{ color: 'black', fontWeight: 'bold' }}>Partial Shipment</h3></div>
-                                        <div className="text-left" style={{ fontWeight: 'bold' }}>
-                                            <p className="mb-0">ID: {shipment && shipment.idcart_tx}</p>
-                                            <p>Date: {shipment && moment(shipment.creaatedon).format('MMM-DD-YYYY')}</p>
+                                        <div>
+                                            {
+                                                shipment && (
+                                                    <p className="mb-0" style={{ wordBreak: 'break-all' }}>
+
+                                                        <span>{shipment.address1}</span><br />
+                                                        <span>{shipment.address2}</span><br />
+                                                        <span>{shipment.city},{shipment.country} {shipment.zip}</span><br />
+                                                        <span>Phone: {job && job.phoneno}</span>{' '}<span>Fax: {job && job.fax}</span>{' '}<span>Email:{job && job.email}</span><br />
+                                                        <span>Contractor License # { }</span>
+                                                    </p>
+                                                )
+                                            }
+                                            <p className="mb-0">{
+                                                job && (
+                                                    <>{job.phoneno}</>
+                                                )
+                                            }</p>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
+
+                            </tr>
+
+                        </tbody>
+                    </Table>
+
+                    <Table borderless>
+                        <tbody>
+                            <tr className="bg-white">
                                 <td style={{ border: 'none' }}>
-                                    <div style={{
-                                        height: '100px',
-                                        width: '250px',
-                                        background: '#e6e6e6',
-                                        borderRadius: '5px',
-                                        padding: '10px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        flexDirection: 'column'
-                                    }} >
-                                        <p className="mb-0" style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>
-                                            {
-                                                job && (
-                                                    <>{job.fname} {job.lname}</>
-                                                )
-                                            }
-                                        </p>
-                                       
-                                            {
-                                                shipment && (
-                                                    <p className="mb-0" style={{ wordBreak: 'break-all'}}>
-                                                        {shipment.address1}<br/>{shipment.address2 ? `, ${shipment.address2}` : ''},{' '}{shipment.city},{' '}{shipment.country}</p>
-                                                )
-                                            }
+                                    <div
+                                        style={{
+                                            background: '#e6e6e6',
+                                            borderRadius: '5px',
+                                            padding: '10px',
+                                            height: '130px',
+                                            maxWidth: '250px',
+                                            display: 'inline-block',
+                                            whiteSpace:'pre-line'
+                                        }}
+                                    >
+                                        <p className="m-0"><span className="font-weight-bold">Shipping To :</span> {shipment && shipment.projectSiteAddress}</p>
                                         
-                                        <p className="mb-0">{
-                                            job && (
-                                                <>{job.phoneno}</>
-                                            )
-                                        }</p>
+                                    </div>
+                                    
+                                </td>
+                                <td style={{ border: 'none' }}>
+                                    <div
+                                        style={{
+                                            background: '#e6e6e6',
+                                            borderRadius: '5px',
+                                            padding: '10px',
+                                            width: '400px',
+                                            marginLeft: 'auto',
+                                            height: '130px'
+                                        }}
+                                    >
+                                        <p>Shipment: <span className="font-weight-bold">Partial/Completed</span></p>
+                                        <p>PO # <span className="font-weight-bold">{shipment && shipment.customerReferenceNumber}</span></p>
+                                        <p>Tracking #: <span className="font-weight-bold">Todo</span></p>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </Table>
                     <Table striped bordered >
                         <thead>
-                            <tr style={{textAlign:'center',color:'#545cd8',fontWeight:'bold'}}>
+                            <tr style={{ textAlign: 'center', color: '#545cd8', fontWeight: 'bold' }}>
                                 <th>
                                     <b>Item Description</b>
                                 </th>
@@ -170,7 +222,7 @@ class TimelineDetailComponent extends Component {
                         <tbody>
                             {
                                 items.map((item, index) => (
-                                    <tr key={index} style={{background:'rgba(0, 0, 0, 0.05)'}}>
+                                    <tr key={index} style={{ background: 'rgba(0, 0, 0, 0.05)' }}>
                                         <td >
                                             <p className="mb-0 overflow-hidden" style={{ fontWeight: 700, color: 'black' }}>
                                                 {item.cmpDescription}
@@ -178,15 +230,15 @@ class TimelineDetailComponent extends Component {
                                             <p className="mb-0">{item.cmpModel}</p>
                                             <p className="mb-0">C-ID: {item.idcmp}</p>
                                         </td>
-                                        <td className="text-right" style={{color:'#212121'}}
+                                        <td className="text-right" style={{ color: '#212121' }}
                                         >
                                             <span>{item.shippedQuantity}</span>
                                         </td>
-                                        <td className="text-right" style={{color:'#212121'}}
+                                        <td className="text-right" style={{ color: '#212121' }}
                                         >
                                             <span>{item.quantity}</span>
                                         </td>
-                                        <td className="text-right" style={{color:'#212121'}}
+                                        <td className="text-right" style={{ color: '#212121' }}
 
                                         >
                                             <span>{item.backOrderQuantity}</span>
