@@ -239,20 +239,43 @@ class TimelineDetailComponent extends Component {
               <tr
                 style={{
                   textAlign: "center",
-                  color: "#545cd8",
+                  color: "black",
                   fontWeight: "bold",
                 }}
               >
-                <th>
+                <th
+                  style={{
+                    width: "60%",
+                  }}
+                >
                   <b>Item Description</b>
                 </th>
-                <th>
+                <th
+                  style={{
+                    width: "10%",
+                  }}
+                >
+                  <b>Price</b>
+                </th>
+                <th
+                  style={{
+                    width: "10%",
+                  }}
+                >
                   <b>Total Ordered</b>
                 </th>
-                <th>
+                <th
+                  style={{
+                    width: "10%",
+                  }}
+                >
                   <b>Shipping now</b>
                 </th>
-                <th>
+                <th
+                  style={{
+                    width: "10%",
+                  }}
+                >
                   <b>Backorder</b>
                 </th>
               </tr>
@@ -273,6 +296,9 @@ class TimelineDetailComponent extends Component {
                     <p className="mb-0" style={{ color: "black" }}>
                       C-ID: {item.idcmp}
                     </p>
+                  </td>
+                  <td style={{ textAlign: "center", color: "black" }}>
+                    <span>{item.saleprice}</span>
                   </td>
                   <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.shippedQuantity}</span>
