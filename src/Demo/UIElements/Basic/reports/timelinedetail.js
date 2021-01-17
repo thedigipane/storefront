@@ -107,33 +107,22 @@ class TimelineDetailComponent extends Component {
                       style={{
                         color: "black",
                         fontWeight: "bold",
-                        fontSize: "12px",
+                        fontSize: "18px",
                       }}
                     >
-                      Shipment:{" "}
+                      PACKING-SLIP
+                    </p>
+                    <p className="mb-0">
+                      Status:{" "}
                       {shipment && shipment.status === 1
                         ? "Partial"
                         : "Completed"}
                     </p>
 
-                    <p
-                      className="mb-0"
-                      style={{
-                        color: "black",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Order # {shipment && shipment.orderConfirmationCode}
+                    <p className="mb-0">
+                      Order: {shipment && shipment.orderConfirmationCode}
                     </p>
-                    <p
-                      className="mb-0"
-                      style={{
-                        color: "black",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                      }}
-                    >
+                    <p className="mb-0">
                       {job && (
                         <>
                           {job.fname} {job.lname}
@@ -141,7 +130,7 @@ class TimelineDetailComponent extends Component {
                       )}
                     </p>
 
-                    <div className="text-left" style={{ fontWeight: "bold" }}>
+                    <div className="text-left">
                       <p className="mb-0">
                         ID: {shipment && shipment.idcart_tx}
                       </p>
@@ -232,14 +221,14 @@ class TimelineDetailComponent extends Component {
                     }}
                   >
                     <p>
-                      PO #{" "}
+                      PO:{" "}
                       <span className="font-weight-bold">
                         {shipment && shipment.customerReferenceNumber}
                       </span>
                     </p>
-                    <p>
-                      Tracking #: <span className="font-weight-bold">Todo</span>
-                    </p>
+                    {/* <p>
+                      Tracking: <span className="font-weight-bold">Todo</span>
+                    </p> */}
                   </div>
                 </td>
               </tr>
@@ -270,7 +259,7 @@ class TimelineDetailComponent extends Component {
             </thead>
             <tbody>
               {items.map((item, index) => (
-                <tr key={index} style={{ background: "rgba(0, 0, 0, 0.05)" }}>
+                <tr key={index} style={{ background: "white" }}>
                   <td>
                     <p
                       className="mb-0 overflow-hidden"
@@ -285,13 +274,13 @@ class TimelineDetailComponent extends Component {
                       C-ID: {item.idcmp}
                     </p>
                   </td>
-                  <td className="text-right" style={{ color: "#212121" }}>
+                  <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.shippedQuantity}</span>
                   </td>
-                  <td className="text-right" style={{ color: "#212121" }}>
+                  <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.quantity}</span>
                   </td>
-                  <td className="text-right" style={{ color: "#212121" }}>
+                  <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.backOrderQuantity}</span>
                   </td>
                 </tr>
