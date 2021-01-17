@@ -94,7 +94,8 @@ class TimelineDetailComponent extends Component {
                   <div
                     style={{
                       height: "200px",
-                      background: "#e6e6e6",
+                      // background: "#e6e6e6",
+                      color: "black",
                       borderRadius: "5px",
                       padding: "10px",
                       display: "inline-block",
@@ -106,7 +107,7 @@ class TimelineDetailComponent extends Component {
                       style={{
                         color: "black",
                         fontWeight: "bold",
-                        fontSize: "18px",
+                        fontSize: "12px",
                       }}
                     >
                       Shipment:{" "}
@@ -159,15 +160,14 @@ class TimelineDetailComponent extends Component {
                     style={{
                       height: "220px",
                       width: "400px",
-                      background: "#dedede",
+                      color: "black",
+                      // background: "#dedede",
                       borderRadius: "10px",
                       padding: "10px",
                     }}
                   >
                     <div>
-                      <h3 style={{ color: "black", fontWeight: "bold" }}>
-                        PROCESSTEC, Inc.
-                      </h3>
+                      <h3 style={{ fontWeight: "bold" }}>PROCESSTEC, Inc.</h3>
                     </div>
                     <div>
                       <p className="mb-0" style={{ wordBreak: "break-all" }}>
@@ -201,7 +201,8 @@ class TimelineDetailComponent extends Component {
                 <td style={{ border: "none" }}>
                   <div
                     style={{
-                      background: "#e6e6e6",
+                      // background: "#e6e6e6",
+                      color: "black",
                       borderRadius: "5px",
                       padding: "10px",
                       height: "180px",
@@ -221,7 +222,8 @@ class TimelineDetailComponent extends Component {
                 <td style={{ border: "none" }}>
                   <div
                     style={{
-                      background: "#e6e6e6",
+                      // background: "#e6e6e6",
+                      color: "black",
                       borderRadius: "5px",
                       padding: "10px",
                       width: "400px",
@@ -276,8 +278,12 @@ class TimelineDetailComponent extends Component {
                     >
                       {item.cmpDescription}
                     </p>
-                    <p className="mb-0">{item.cmpModel}</p>
-                    <p className="mb-0">C-ID: {item.idcmp}</p>
+                    <p className="mb-0" style={{ color: "black" }}>
+                      {item.cmpModel}
+                    </p>
+                    <p className="mb-0" style={{ color: "black" }}>
+                      C-ID: {item.idcmp}
+                    </p>
                   </td>
                   <td className="text-right" style={{ color: "#212121" }}>
                     <span>{item.shippedQuantity}</span>
