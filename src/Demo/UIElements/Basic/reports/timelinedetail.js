@@ -55,6 +55,10 @@ class TimelineDetailComponent extends Component {
   };
   render() {
     const { loading, items, job, shipment } = this.state;
+    const fontFamilyName = "Calibri";
+    const fontSizeBig = "18px";
+    const fontSizeMedium = "14px";
+    const fontSizeSmall = "12px";
     return (
       <Aux>
         {loading && <Loader />}
@@ -64,7 +68,7 @@ class TimelineDetailComponent extends Component {
             // to the root node of the returned component as it will be overwritten.
             return (
               <a href="#" className="btn btn-primary btn-lg mb-3">
-                Print this out!
+                Print
               </a>
             );
           }}
@@ -105,24 +109,43 @@ class TimelineDetailComponent extends Component {
                     <p
                       className="mb-0"
                       style={{
+                        fontFamily: fontFamilyName,
                         color: "black",
                         fontWeight: "bold",
-                        fontSize: "18px",
+                        fontSize: fontSizeBig,
                       }}
                     >
                       PACKING-SLIP
                     </p>
-                    <p className="mb-0">
+                    <p
+                      className="mb-0"
+                      style={{
+                        fontFamily: fontFamilyName,
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
                       Status:{" "}
                       {shipment && shipment.status === 1
                         ? "Partial"
                         : "Completed"}
                     </p>
 
-                    <p className="mb-0">
+                    <p
+                      className="mb-0"
+                      style={{
+                        fontFamily: fontFamilyName,
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
                       Order: {shipment && shipment.orderConfirmationCode}
                     </p>
-                    <p className="mb-0">
+                    <p
+                      className="mb-0"
+                      style={{
+                        fontFamily: fontFamilyName,
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
                       {job && (
                         <>
                           {job.fname} {job.lname}
@@ -131,10 +154,21 @@ class TimelineDetailComponent extends Component {
                     </p>
 
                     <div className="text-left">
-                      <p className="mb-0">
+                      <p
+                        className="mb-0"
+                        style={{
+                          fontFamily: fontFamilyName,
+                          fontSize: fontSizeMedium,
+                        }}
+                      >
                         ID: {shipment && shipment.idcart_tx}
                       </p>
-                      <p>
+                      <p
+                        style={{
+                          fontFamily: fontFamilyName,
+                          fontSize: fontSizeMedium,
+                        }}
+                      >
                         Date:{" "}
                         {shipment &&
                           moment(shipment.creaatedon).format("MMM-DD-YYYY")}
@@ -156,10 +190,24 @@ class TimelineDetailComponent extends Component {
                     }}
                   >
                     <div>
-                      <h3 style={{ fontWeight: "bold" }}>PROCESSTEC, Inc.</h3>
+                      <h3
+                        style={{
+                          fontWeight: "bold",
+                          fontFamily: fontFamilyName,
+                        }}
+                      >
+                        PROCESSTEC, Inc.
+                      </h3>
                     </div>
                     <div>
-                      <p className="mb-0" style={{ wordBreak: "break-all" }}>
+                      <p
+                        className="mb-0"
+                        style={{
+                          fontFamily: fontFamilyName,
+                          fontSize: fontSizeMedium,
+                          wordBreak: "break-all",
+                        }}
+                      >
                         <span>
                           345 ETulare Ave, Unit E, <br />
                           Visalia CA 93278
@@ -173,9 +221,9 @@ class TimelineDetailComponent extends Component {
                         <span>Fax: {job && job.fax}</span>{" "}
                         <span>Email:{job && job.email}</span>
                         <br />
-                        <span>Contractor License # {}</span>
+                        <span>Contractor License: 804551</span>
                       </p>
-                      <p className="mb-0">Contractor License # 804551</p>
+                      {/* <p className="mb-0">Contractor License # 804551</p> */}
                     </div>
                   </div>
                 </td>
@@ -200,8 +248,20 @@ class TimelineDetailComponent extends Component {
                       whiteSpace: "pre-line",
                     }}
                   >
-                    <p className="m-0">
-                      <span className="font-weight-bold">
+                    <p
+                      className="m-0"
+                      style={{
+                        fontFamily: fontFamilyName,
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: fontFamilyName,
+                          fontSize: fontSizeBig,
+                          fontWeight: "bold",
+                        }}
+                      >
                         Shipping To :<br />
                       </span>{" "}
                       {shipment && shipment.projectSiteAddress}
@@ -220,9 +280,14 @@ class TimelineDetailComponent extends Component {
                       height: "180px",
                     }}
                   >
-                    <p>
-                      PO:{" "}
-                      <span className="font-weight-bold">
+                    <p
+                      style={{
+                        fontFamily: fontFamilyName,
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
+                      Purchase Order:{" "}
+                      <span>
                         {shipment && shipment.customerReferenceNumber}
                       </span>
                     </p>
@@ -241,22 +306,24 @@ class TimelineDetailComponent extends Component {
                   textAlign: "center",
                   color: "black",
                   fontWeight: "bold",
+                  fontFamily: fontFamilyName,
+                  fontSize: fontSizeMedium,
                 }}
               >
                 <th
                   style={{
-                    width: "60%",
+                    width: "70%",
                   }}
                 >
                   <b>Item Description</b>
                 </th>
-                <th
+                {/* <th
                   style={{
                     width: "10%",
                   }}
                 >
                   <b>Price</b>
-                </th>
+                </th> */}
                 <th
                   style={{
                     width: "10%",
@@ -282,24 +349,45 @@ class TimelineDetailComponent extends Component {
             </thead>
             <tbody>
               {items.map((item, index) => (
-                <tr key={index} style={{ background: "white" }}>
+                <tr
+                  key={index}
+                  style={{
+                    background: "white",
+                    fontFamily: fontFamilyName,
+                    fontSize: fontSizeMedium,
+                    color: "black",
+                  }}
+                >
                   <td>
                     <p
                       className="mb-0 overflow-hidden"
-                      style={{ fontWeight: 700, color: "black" }}
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: fontSizeMedium,
+                      }}
                     >
                       {item.cmpDescription}
                     </p>
-                    <p className="mb-0" style={{ color: "black" }}>
+                    <p
+                      className="mb-0"
+                      style={{
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
                       {item.cmpModel}
                     </p>
-                    <p className="mb-0" style={{ color: "black" }}>
+                    <p
+                      className="mb-0"
+                      style={{
+                        fontSize: fontSizeMedium,
+                      }}
+                    >
                       C-ID: {item.idcmp}
                     </p>
                   </td>
-                  <td style={{ textAlign: "center", color: "black" }}>
+                  {/* <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.saleprice}</span>
-                  </td>
+                  </td> */}
                   <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.shippedQuantity}</span>
                   </td>
