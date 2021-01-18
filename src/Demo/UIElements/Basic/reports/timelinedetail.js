@@ -55,7 +55,8 @@ class TimelineDetailComponent extends Component {
   };
   render() {
     const { loading, items, job, shipment } = this.state;
-    const fontFamilyName = "Calibri";
+    const fontFamilyName =
+      "Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif";
     const fontSizeBig = "18px";
     const fontSizeMedium = "14px";
     const fontSizeSmall = "12px";
@@ -305,7 +306,6 @@ class TimelineDetailComponent extends Component {
                 style={{
                   textAlign: "center",
                   color: "black",
-                  fontWeight: "bold",
                   fontFamily: fontFamilyName,
                   fontSize: fontSizeMedium,
                 }}
