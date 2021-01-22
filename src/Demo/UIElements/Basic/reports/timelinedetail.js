@@ -55,8 +55,7 @@ class TimelineDetailComponent extends Component {
   };
   render() {
     const { loading, items, job, shipment } = this.state;
-    const fontFamilyName =
-      "Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif";
+    const fontFamilyName = "Calibri, sans-serif";
     const fontSizeBig = "18px";
     const fontSizeMedium = "14px";
     const fontSizeSmall = "12px";
@@ -85,7 +84,7 @@ class TimelineDetailComponent extends Component {
           >
             <img
               src={shipment && shipment.image}
-              alt="no image"
+              alt="ProcessTec Logo"
               style={{
                 width: "100%",
                 height: "auto",
@@ -195,6 +194,7 @@ class TimelineDetailComponent extends Component {
                         style={{
                           fontWeight: "bold",
                           fontFamily: fontFamilyName,
+                          textAlign: "right",
                         }}
                       >
                         PROCESSTEC, Inc.
@@ -207,10 +207,11 @@ class TimelineDetailComponent extends Component {
                           fontFamily: fontFamilyName,
                           fontSize: fontSizeMedium,
                           wordBreak: "break-all",
+                          textAlign: "right",
                         }}
                       >
                         <span>
-                          345 ETulare Ave, Unit E, <br />
+                          345 E Tulare Ave, Unit E, <br />
                           Visalia CA 93278
                         </span>
                         <br />
@@ -218,10 +219,7 @@ class TimelineDetailComponent extends Component {
                         <br />
                         <span>Fax: (559) 429-4228</span>
                         <br />
-                        <span>E-mail: info@processtec.com</span>{" "}
-                        <span>Fax: {job && job.fax}</span>{" "}
-                        <span>Email:{job && job.email}</span>
-                        <br />
+                        <span>E-mail: info@processtec.com</span> <br />
                         <span>Contractor License: 804551</span>
                       </p>
                       {/* <p className="mb-0">Contractor License # 804551</p> */}
@@ -285,9 +283,10 @@ class TimelineDetailComponent extends Component {
                       style={{
                         fontFamily: fontFamilyName,
                         fontSize: fontSizeMedium,
+                        textAlign: "right",
                       }}
                     >
-                      Purchase Order:{" "}
+                      Customer Reference#{" "}
                       <span>
                         {shipment && shipment.customerReferenceNumber}
                       </span>
@@ -300,7 +299,13 @@ class TimelineDetailComponent extends Component {
               </tr>
             </tbody>
           </Table>
-          <Table striped bordered>
+          <Table
+            striped
+            bordered
+            style={{
+              tableLayout: "fixed",
+            }}
+          >
             <thead>
               <tr
                 style={{
@@ -312,7 +317,24 @@ class TimelineDetailComponent extends Component {
               >
                 <th
                   style={{
-                    width: "70%",
+                    width: "8%",
+                  }}
+                >
+                  <b>
+                    Line
+                    <br /> number
+                  </b>
+                </th>
+                <th
+                  style={{
+                    width: "10%",
+                  }}
+                >
+                  <b>Image TODO</b>
+                </th>
+                <th
+                  style={{
+                    width: "57%",
                   }}
                 >
                   <b>Item Description</b>
@@ -326,21 +348,29 @@ class TimelineDetailComponent extends Component {
                 </th> */}
                 <th
                   style={{
-                    width: "10%",
+                    width: "8%",
                   }}
                 >
-                  <b>Total Ordered</b>
+                  <b>
+                    Total
+                    <br />
+                    Ordered
+                  </b>
                 </th>
                 <th
                   style={{
-                    width: "10%",
+                    width: "9%",
                   }}
                 >
-                  <b>Shipping now</b>
+                  <b>
+                    Shipping
+                    <br />
+                    now
+                  </b>
                 </th>
                 <th
                   style={{
-                    width: "10%",
+                    width: "8%",
                   }}
                 >
                   <b>Backorder</b>
@@ -358,6 +388,21 @@ class TimelineDetailComponent extends Component {
                     color: "black",
                   }}
                 >
+                  <td style={{ textAlign: "center", color: "black" }}>
+                    <span>20</span>
+                  </td>
+                  <td>
+                    <img
+                      src={
+                        "http://13.57.196.153:8080/static/Documentation/2/53/2535_H_Mechanical%20Seal%20DAMS_HUHNSEAL_NG.png"
+                      }
+                      alt="ProcessTec Logo"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                  </td>
                   <td>
                     <p
                       className="mb-0 overflow-hidden"
@@ -383,6 +428,19 @@ class TimelineDetailComponent extends Component {
                       }}
                     >
                       C-ID: {item.idcmp}
+                    </p>
+                    <p
+                      className="mb-0"
+                      style={{
+                        fontSize: fontSizeMedium,
+                        wordBreak: "break-word",
+                        overflowWrap: "break-word",
+                        display: "block",
+                        wordWrap: "break-word",
+                      }}
+                    >
+                      Contrary to popular belief, Lorem Ipsum is not simply
+                      random text.
                     </p>
                   </td>
                   {/* <td style={{ textAlign: "center", color: "black" }}>
