@@ -286,7 +286,7 @@ class TimelineDetailComponent extends Component {
                         textAlign: "right",
                       }}
                     >
-                      Customer Reference#{" "}
+                      Customer Reference: PO#{" "}
                       <span>
                         {shipment && shipment.customerReferenceNumber}
                       </span>
@@ -322,7 +322,7 @@ class TimelineDetailComponent extends Component {
                 >
                   <b>
                     Line
-                    <br /> number
+                    <br /> Item
                   </b>
                 </th>
                 <th
@@ -330,7 +330,7 @@ class TimelineDetailComponent extends Component {
                     width: "10%",
                   }}
                 >
-                  <b>Image TODO</b>
+                  <b>Image</b>
                 </th>
                 <th
                   style={{
@@ -389,14 +389,12 @@ class TimelineDetailComponent extends Component {
                   }}
                 >
                   <td style={{ textAlign: "center", color: "black" }}>
-                    <span>20</span>
+                    <span>{item.lineItem}</span>
                   </td>
                   <td>
                     <img
-                      src={
-                        "http://13.57.196.153:8080/static/Documentation/2/53/2535_H_Mechanical%20Seal%20DAMS_HUHNSEAL_NG.png"
-                      }
-                      alt="ProcessTec Logo"
+                      src={item.componentImage[0]}
+                      alt={item.componentUrl}
                       style={{
                         width: "100%",
                         height: "auto",
