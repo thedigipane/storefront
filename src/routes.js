@@ -27,6 +27,7 @@ const Alerts = React.lazy(() => import('./Demo/UIElements/Basic/alert'));
 const Shipments = React.lazy(() => import('./Demo/UIElements/Basic/reports/shipments'));
 const Timeline = React.lazy(() => import('./Demo/UIElements/Basic/reports/timeline'));
 const TimelineDetail = React.lazy(() => import('./Demo/UIElements/Basic/reports/timelinedetail'));
+const EditTimelineDetail = React.lazy(() => import('./Demo/UIElements/Basic/reports/edittimelinedetail'));
 
 const Locations = React.lazy(() => import('./Demo/UIElements/Basic/location'));
 const Charts = React.lazy(() => import('./Demo/UIElements/Basic/charts'));
@@ -64,6 +65,7 @@ const routes = [
     { path: '/basic/reports/shipments', exact: true, name: 'Shipments', component: RequireAuth(Shipments) },
     { path: '/basic/reports/timeline/:id', exact: true, name: 'Timeline', component: RequireAuth(Timeline) },
     { path: '/basic/reports/timeline/detail/:id', exact: true, name: 'Detail', component: RequireAuth(TimelineDetail) },
+    { path: '/basic/reports/timeline/edit/detail/:id', exact: true, name: 'Edit Detail', component: RequireAuth(EditTimelineDetail) },
     { path: '/basic/charts', exact: true, name: 'Chart', component: RequireAuth(Charts) },
     { path: '/basic/locations', exact: true, name: 'Location', component: RequireAuth(Locations) },
 

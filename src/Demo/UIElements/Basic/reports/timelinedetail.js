@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Card, Table } from "react-bootstrap";
+import { Row, Col, Table, Button } from "react-bootstrap";
 import DEMO from "../../../../store/constant";
 import windowSize from "react-window-size";
 import Config from "../../../../config";
@@ -53,6 +53,13 @@ class TimelineDetailComponent extends Component {
         history.push("/auth/session");
       });
   };
+  renderTimelineDetailEdit = () => {
+    const {
+      history,
+      match: { params },
+    } = this.props;
+    history.push(`/basic/reports/timeline/edit/detail/${params.id}`)
+  }
   render() {
     const { loading, items, job, shipment } = this.state;
     const fontFamilyName = "Calibri, sans-serif";
@@ -62,18 +69,30 @@ class TimelineDetailComponent extends Component {
     return (
       <Aux>
         {loading && <Loader />}
-        <ReactToPrint
+        <Row noGutters>
+          <Col className="px-3">
+            <Button size="lg" onClick={() => this.renderTimelineDetailEdit()} >
+              Edit
+                </Button>
+          </Col>
+          <Col>
+          <ReactToPrint
           trigger={() => {
-            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-            // to the root node of the returned component as it will be overwritten.
             return (
-              <a href="#" className="btn btn-primary btn-lg mb-3">
-                Print
+              <Row noGutters>
+                <Col className="text-right">
+                  <a href="#" className="btn btn-primary btn-lg mb-3">
+                    Print
               </a>
+                </Col>
+              </Row>
             );
           }}
           content={() => this.componentRef}
         />
+        </Col>
+        </Row>
+        
         <div className="p-3" ref={(el) => (this.componentRef = el)}>
           <div
             style={{
@@ -401,9 +420,9 @@ class TimelineDetailComponent extends Component {
                       }}
                     />
                   </td>
-                  <td>
+                  <td >
                     <p
-                      className="mb-0 overflow-hidden"
+                      className="mb-0"
                       style={{
                         fontWeight: "bold",
                         fontSize: fontSizeMedium,
@@ -427,19 +446,17 @@ class TimelineDetailComponent extends Component {
                     >
                       C-ID: {item.idcmp}
                     </p>
-                    <p
+                    <div
                       className="mb-0"
                       style={{
                         fontSize: fontSizeMedium,
                         wordBreak: "break-word",
                         overflowWrap: "break-word",
-                        display: "block",
                         wordWrap: "break-word",
                       }}
                     >
-                      Contrary to popular belief, Lorem Ipsum is not simply
-                      random text.
-                    </p>
+                      {item.reportDescription}
+                    </div>
                   </td>
                   {/* <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.saleprice}</span>
