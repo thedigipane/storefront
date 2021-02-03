@@ -99,7 +99,7 @@ class TimelineDetailComponent extends Component {
             items
         })
     }
-    renderlineItem=(value, item, index)=>{
+    renderlineItem = (value, item, index) => {
         item.lineItem = value;
         const { items } = this.state;
         items[index] = item;
@@ -380,7 +380,7 @@ class TimelineDetailComponent extends Component {
                             >
                                 <th
                                     style={{
-                                        width: "8%",
+                                        width: "12%",
                                     }}
                                 >
                                     <b>
@@ -452,7 +452,7 @@ class TimelineDetailComponent extends Component {
                                     }}
                                 >
                                     <td style={{ textAlign: "center", color: "black" }}>
-                                        <Form.Control type="number" min="0" name='lineItem' value={item.lineItem || 0} onChange={(e)=>this.renderlineItem(e.target.value,item,index)} />
+                                        <Form.Control type="number" min="0" name='lineItem' value={item.lineItem || 0} onChange={(e) => this.renderlineItem(e.target.value, item, index)} />
                                         {/* <span>{item.lineItem}</span> */}
                                     </td>
                                     <td>

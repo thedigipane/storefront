@@ -336,7 +336,7 @@ class TimelineDetailComponent extends Component {
               >
                 <th
                   style={{
-                    width: "8%",
+                    width: "12%",
                   }}
                 >
                   <b>
