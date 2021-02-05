@@ -58,41 +58,41 @@ class TimelineDetailComponent extends Component {
       history,
       match: { params },
     } = this.props;
-    history.push(`/basic/reports/timeline/edit/detail/${params.id}`)
-  }
+    history.push(`/basic/reports/timeline/edit/detail/${params.id}`);
+  };
   render() {
     const { loading, items, job, shipment } = this.state;
     const fontFamilyName = "Calibri, sans-serif";
-    const fontSizeBig = "18px";
-    const fontSizeMedium = "14px";
-    const fontSizeSmall = "12px";
+    const fontSizeBig = "22px";
+    const fontSizeMedium = "18px";
+    const fontSizeSmall = "16px";
     return (
       <Aux>
         {loading && <Loader />}
         <Row noGutters>
           <Col className="px-3">
-            <Button size="lg" onClick={() => this.renderTimelineDetailEdit()} >
+            <Button size="lg" onClick={() => this.renderTimelineDetailEdit()}>
               Edit
-                </Button>
+            </Button>
           </Col>
           <Col>
-          <ReactToPrint
-          trigger={() => {
-            return (
-              <Row noGutters>
-                <Col className="text-right">
-                  <a href="#" className="btn btn-primary btn-lg mb-3">
-                    Print
-              </a>
-                </Col>
-              </Row>
-            );
-          }}
-          content={() => this.componentRef}
-        />
-        </Col>
+            <ReactToPrint
+              trigger={() => {
+                return (
+                  <Row noGutters>
+                    <Col className="text-right">
+                      <a href="#" className="btn btn-primary btn-lg mb-3">
+                        Print
+                      </a>
+                    </Col>
+                  </Row>
+                );
+              }}
+              content={() => this.componentRef}
+            />
+          </Col>
         </Row>
-        
+
         <div className="p-3" ref={(el) => (this.componentRef = el)}>
           <div
             style={{
@@ -280,7 +280,7 @@ class TimelineDetailComponent extends Component {
                           fontWeight: "bold",
                         }}
                       >
-                        Shipping To :<br />
+                        Ship To :<br />
                       </span>{" "}
                       {shipment && shipment.projectSiteAddress}
                     </p>
@@ -336,7 +336,7 @@ class TimelineDetailComponent extends Component {
               >
                 <th
                   style={{
-                    width: "12%",
+                    width: "9%",
                   }}
                 >
                   <b>
@@ -353,7 +353,7 @@ class TimelineDetailComponent extends Component {
                 </th>
                 <th
                   style={{
-                    width: "57%",
+                    width: "58%",
                   }}
                 >
                   <b>Item Description</b>
@@ -389,7 +389,7 @@ class TimelineDetailComponent extends Component {
                 </th>
                 <th
                   style={{
-                    width: "8%",
+                    width: "10%",
                   }}
                 >
                   <b>Backorder</b>
@@ -420,7 +420,7 @@ class TimelineDetailComponent extends Component {
                       }}
                     />
                   </td>
-                  <td >
+                  <td>
                     <p
                       className="mb-0"
                       style={{
@@ -442,6 +442,7 @@ class TimelineDetailComponent extends Component {
                       className="mb-0"
                       style={{
                         fontSize: fontSizeMedium,
+                        color: "#d9272b",
                       }}
                     >
                       C-ID: {item.idcmp}
