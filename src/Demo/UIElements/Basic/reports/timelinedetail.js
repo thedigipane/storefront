@@ -63,9 +63,10 @@ class TimelineDetailComponent extends Component {
   render() {
     const { loading, items, job, shipment } = this.state;
     const fontFamilyName = "Calibri, sans-serif";
+    const lineSpacing = "200%";
     const fontSizeBig = "22px";
-    const fontSizeMedium = "18px";
-    const fontSizeSmall = "16px";
+    const fontSizeMedium = "16px";
+    const fontSizeSmall = "15px";
     return (
       <Aux>
         {loading && <Loader />}
@@ -123,6 +124,7 @@ class TimelineDetailComponent extends Component {
                       padding: "10px",
                       display: "inline-block",
                       width: "300px",
+                      lineHeight: lineSpacing,
                     }}
                   >
                     <p
@@ -206,6 +208,7 @@ class TimelineDetailComponent extends Component {
                       // background: "#dedede",
                       borderRadius: "10px",
                       padding: "10px",
+                      lineHeight: lineSpacing,
                     }}
                   >
                     <div>
@@ -264,6 +267,7 @@ class TimelineDetailComponent extends Component {
                       maxWidth: "250px",
                       display: "inline-block",
                       whiteSpace: "pre-line",
+                      lineHeight: lineSpacing,
                     }}
                   >
                     <p
@@ -296,6 +300,7 @@ class TimelineDetailComponent extends Component {
                       width: "400px",
                       marginLeft: "auto",
                       height: "180px",
+                      lineHeight: lineSpacing,
                     }}
                   >
                     <p
@@ -331,7 +336,7 @@ class TimelineDetailComponent extends Component {
                   textAlign: "center",
                   color: "black",
                   fontFamily: fontFamilyName,
-                  fontSize: fontSizeMedium,
+                  fontSize: fontSizeSmall,
                 }}
               >
                 <th

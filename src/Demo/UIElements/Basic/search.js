@@ -320,7 +320,7 @@ class DataGrid extends Component {
                         Company: <b>{item.companyname}</b>
                       </h6>
                       <h6>
-                        Model: <b>{item.mfgmodelnumber}</b>
+                        Model Name: <b>{item.mfgmodelnumber}</b>
                       </h6>
                       {/* <h6  ><b>Supplier-Company:</b> {item.companyname}</h6> */}
                     </Col>
