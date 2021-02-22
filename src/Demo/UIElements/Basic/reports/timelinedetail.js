@@ -392,7 +392,10 @@ class TimelineDetailComponent extends Component {
                     width: "10%",
                   }}
                 >
-                  <b>Backorder</b>
+                  <b>
+                    Back <br />
+                    Order
+                  </b>
                 </th>
               </tr>
             </thead>
@@ -445,7 +448,7 @@ class TimelineDetailComponent extends Component {
                         color: "#d9272b",
                       }}
                     >
-                      C-ID: {item.idcmp}
+                      Part# {item.idcmp}
                     </p>
                     <div
                       className="mb-0"

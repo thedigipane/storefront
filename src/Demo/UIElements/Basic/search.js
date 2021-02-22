@@ -284,83 +284,79 @@ class DataGrid extends Component {
         </Row>
         <Row>
           {items.map((item, index) => (
-            <Col
-              className="col-12 col-sm-6 col-lg-4  mb-2 px-1"
-              key={index}
-            >
+            <Col className="col-12 col-sm-6 col-lg-4  mb-2 px-1" key={index}>
               <div className="bg-white h-100">
-              <Card
-                className="mb-0"
-                style={{
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  background: "none",
-                  boxShadow: "none",
-                }}
-                onClick={() => {
-                  history.push(`/basic/detail/${item.componentid}`);
-                  localStorage.setItem("searchitem", JSON.stringify(item));
-                }}
-              >
-                <Row className="p-2 pt-3" noGutters>
-                  <Col className="col-5 p-2">
-                    {
-                      <img
-                        alt={item.imagedescription}
-                        src={item.images[0]}
-                        className="img-fluid"
-                      />
-                    }
-                  </Col>
-                  <Col className="col-7 pt-3 text-right pr-3">
-                    <h6>
-                      <b>{item.categorydescription}</b>
-                    </h6>
-                    <h6>
-                      C-ID: <b>{item.componentid}</b>
-                    </h6>
-                    <h6>
-                      Company: <b>{item.companyname}</b>
-                    </h6>
-                    <h6>
-                      Model: <b>{item.mfgmodelnumber}</b>
-                    </h6>
-                    {/* <h6  ><b>Supplier-Company:</b> {item.companyname}</h6> */}
-                  </Col>
-                </Row>
-                <Card.Body className="py-0">
-                  <div>
-                    <h6>
-                      <b>Taxonomy: </b> {item.taxonomy}
-                    </h6>
-                    <h6>
-                      <b>Elastomerdescription: </b>
-                      {item.elastomerdescription}
-                    </h6>
-                    <h6>
-                      <b>Stockroomlabel: </b>
-                      {item.stockroomlabel}
-                    </h6>
+                <Card
+                  className="mb-0"
+                  style={{
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    background: "none",
+                    boxShadow: "none",
+                  }}
+                  onClick={() => {
+                    history.push(`/basic/detail/${item.componentid}`);
+                    localStorage.setItem("searchitem", JSON.stringify(item));
+                  }}
+                >
+                  <Row className="p-2 pt-3" noGutters>
+                    <Col className="col-5 p-2">
+                      {
+                        <img
+                          alt={item.imagedescription}
+                          src={item.images[0]}
+                          className="img-fluid"
+                        />
+                      }
+                    </Col>
+                    <Col className="col-7 pt-3 text-right pr-3">
+                      <h6>
+                        <b>{item.categorydescription}</b>
+                      </h6>
+                      <h6>
+                        Part# <b>{item.componentid}</b>
+                      </h6>
+                      <h6>
+                        Company: <b>{item.companyname}</b>
+                      </h6>
+                      <h6>
+                        Model: <b>{item.mfgmodelnumber}</b>
+                      </h6>
+                      {/* <h6  ><b>Supplier-Company:</b> {item.companyname}</h6> */}
+                    </Col>
+                  </Row>
+                  <Card.Body className="py-0">
+                    <div>
+                      <h6>
+                        <b>Taxonomy: </b> {item.taxonomy}
+                      </h6>
+                      <h6>
+                        <b>Elastomers: </b>
+                        {item.elastomers}
+                      </h6>
+                      <h6>
+                        <b>Materials: </b>
+                        {item.materials}
+                      </h6>
+                    </div>
+                  </Card.Body>
+                </Card>
+                <div className="text-right">
+                  <div className="checkbox checkbox-fill d-inline">
+                    <input
+                      type="checkbox"
+                      name={`checkbox-fill-item-${index}`}
+                      id={`checkbox-fill-item-${index}`}
+                      onClick={() =>
+                        this.renderSelectedCheckbox(item.componentid)
+                      }
+                    />
+                    <label
+                      htmlFor={`checkbox-fill-item-${index}`}
+                      className="cr"
+                    ></label>
                   </div>
-                </Card.Body>
-              </Card>
-              <div className="text-right">
-                <div className="checkbox checkbox-fill d-inline">
-                  <input
-                    type="checkbox"
-                    name={`checkbox-fill-item-${index}`}
-                    id={`checkbox-fill-item-${index}`}
-                    onClick={() =>
-                      this.renderSelectedCheckbox(item.componentid)
-                    }
-                  />
-                  <label
-                    htmlFor={`checkbox-fill-item-${index}`}
-                    className="cr"
-                  ></label>
                 </div>
-              </div>
-            
               </div>
             </Col>
           ))}

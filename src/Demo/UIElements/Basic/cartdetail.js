@@ -294,6 +294,18 @@ class CartDetailComponent extends Component {
                       <b>{item && item.description}</b>
                     </h5>
                     <h6>
+                      <b>Title: </b>
+                      {item && item.title}
+                    </h6>
+                    <h6>
+                      <b>Customer# </b>
+                      {item && item.customerreferencenumber}
+                    </h6>
+                    <h6>
+                      <b>Order Confirmation#</b>{" "}
+                      {item && item.orderconfirmationid}
+                    </h6>
+                    <h6>
                       <b>Cart Id: </b>
                       {item && item.idcart}
                     </h6>
@@ -339,7 +351,7 @@ class CartDetailComponent extends Component {
                           color: "#d9272b",
                         }}
                       >
-                        C-ID: {item.details && item.details.idcmp}
+                        Part# {item.details && item.details.idcmp}
                       </h6>
                       <h6>
                         Company:{" "}

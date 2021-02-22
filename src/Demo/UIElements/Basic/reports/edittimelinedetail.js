@@ -451,7 +451,10 @@ class TimelineDetailComponent extends Component {
                     width: "8%",
                   }}
                 >
-                  <b>Backorder</b>
+                  <b>
+                    Back <br />
+                    Order
+                  </b>
                 </th>
               </tr>
             </thead>
@@ -512,7 +515,7 @@ class TimelineDetailComponent extends Component {
                         fontSize: fontSizeMedium,
                       }}
                     >
-                      C-ID: {item.idcmp}
+                      Part# {item.idcmp}
                     </p>
                     <textarea
                       className="mb-0 w-100 form-control"
