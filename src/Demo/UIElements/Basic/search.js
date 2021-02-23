@@ -41,6 +41,24 @@ class DataGrid extends Component {
   };
   componentDidMount() {
     window.addEventListener("keydown", this.renderCosmeticClicks);
+    this.renderLoadCart();
+    this.renderLoadCachedData();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.renderCosmeticClicks);
+  }
+  renderLoadCachedData = () => {
+    const { history } = this.props;
+    const search = localStorage.getItem('search_result');
+    const check = (localStorage.getItem('search_result_check') === 'true');
+    console.log(typeof check)
+    if (search === '') {
+      return;
+    }
+    this.callSearchApi(check, history, search)
+  }
+  renderLoadCart = () => {
     const { history } = this.props;
     Axios.get(Config.prod + "/api/cart/all", {
       params: {
@@ -61,9 +79,6 @@ class DataGrid extends Component {
           history.push("/auth/session");
         }
       });
-  }
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.renderCosmeticClicks);
   }
   renderCosmeticClicks = (event) => {
     // const { history } = this.props;
@@ -99,6 +114,8 @@ class DataGrid extends Component {
     input.focus();
   };
   callSearchApi = (check, history, search) => {
+    localStorage.setItem('search_result', search);
+    localStorage.setItem('search_result_check', check);
     Axios.get(
       `${Config.prod}/api/component/${check ? search : `search?q=${search}`}`,
       {
@@ -420,8 +437,8 @@ class DataGrid extends Component {
             </Row>
           </Modal>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </Aux>
     );
   }
