@@ -171,7 +171,7 @@ class AddToCartModal extends Component {
                     }}
                     options={items.map((item) => {
                       return {
-                        label: `Cart: ${item.idcart}, OC: ${item.idOC}, CostCenter: ${item.costcenterid}`,
+                        label: `${item.title} -- ${item.customerreferencenumber}, OC: ${item.idOC}, CostCenter: ${item.costcenterid}, Cart: ${item.idcart}`,
                         value: item,
                       };
                     })}

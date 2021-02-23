@@ -387,7 +387,7 @@ class DataGrid extends Component {
                     }}
                     options={carts.map((item) => {
                       return {
-                        label: `Cart: ${item.idcart}, OC: ${item.idOC}, CostCenter: ${item.costcenterid} -- ${item.description}`,
+                        label: `${item.title} -- ${item.customerreferencenumber}, OC: ${item.idOC}, CostCenter: ${item.costcenterid}, Cart: ${item.idcart}`,
                         value: item,
                       };
                     })}
