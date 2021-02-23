@@ -291,19 +291,14 @@ class CartDetailComponent extends Component {
                 <Row>
                   <Col className="col-12 col-sm-6">
                     <h5>
-                      <b>{item && item.description}</b>
+                      <b>{item && item.title}</b>
                     </h5>
-                    <h6>
-                      <b>Title: </b>
-                      {item && item.title}
-                    </h6>
                     <h6>
                       <b>Customer# </b>
                       {item && item.customerreferencenumber}
                     </h6>
                     <h6>
-                      <b>Order Confirmation#</b>{" "}
-                      {item && item.orderconfirmationid}
+                      <b>Order Confirmation# </b> {item && item.ocId}
                     </h6>
                     <h6>
                       <b>Cart Id: </b>
@@ -316,6 +311,10 @@ class CartDetailComponent extends Component {
                     <h6>
                       <b>Job Name: </b>
                       {item && item.jobname}
+                    </h6>
+                    <h6>
+                      <b>Description: </b>
+                      {item && item.description}
                     </h6>
                   </Col>
                   <Col className="col-12 col-sm-6">

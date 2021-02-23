@@ -89,14 +89,14 @@ class CartComponent extends Component {
               >
                 <Card.Body>
                   <h5>
-                    <b>{item.description}</b>
+                    <b>{item.title}</b>
                   </h5>
                   <h6>
-                    <b>Cart ID: </b>
-                    {item.idcart}
+                    <b>Customer# </b>
+                    {item.customerreferencenumber}
                   </h6>
                   <h6>
-                    <b>Order Confitmation ID: </b>
+                    <b>Order Confirmation# </b>
                     {item.idPO}
                   </h6>
                   <h6>
@@ -104,15 +104,12 @@ class CartComponent extends Component {
                     {item.jobname}
                   </h6>
                   <h6>
-                    <b>Title: </b>
-                    {item.title}
+                    <b>Cart ID: </b>
+                    {item.idcart}
                   </h6>
                   <h6>
-                    <b>Customer# </b>
-                    {item.customerreferencenumber}
-                  </h6>
-                  <h6>
-                    <b>Order Confirmation#</b> {item.orderconfirmationid}
+                    <b>Description: </b>
+                    {item.description}
                   </h6>
                 </Card.Body>
               </Card>

@@ -125,7 +125,15 @@ class NewCartComponent extends Component {
                   {cart ? (
                     <div>
                       <h6>
-                        <b>OC Code:</b> {cart.ocId}
+                        <b>Title: </b>
+                        {cart.title}
+                      </h6>
+                      <h6>
+                        <b>Customer# </b>
+                        {cart.customerreferencenumber}
+                      </h6>
+                      <h6>
+                        <b>Order Confirmation# </b> {cart.ocId}
                       </h6>
                       <h6>
                         <b>Job Name: </b>
@@ -138,17 +146,6 @@ class NewCartComponent extends Component {
                       <h6>
                         <b>Contact Info: </b>
                         {cart.contactinfo}
-                      </h6>
-                      <h6>
-                        <b>Title: </b>
-                        {cart.title}
-                      </h6>
-                      <h6>
-                        <b>Customer# </b>
-                        {cart.customerreferencenumber}
-                      </h6>
-                      <h6>
-                        <b>Order Confirmation#</b> {cart.orderconfirmationid}
                       </h6>
                     </div>
                   ) : (

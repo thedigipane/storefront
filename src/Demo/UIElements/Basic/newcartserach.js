@@ -123,6 +123,7 @@ class NewCartSearch extends Component {
         costcenterid: item.costcenterid,
         contactinfo: item.contactinfo,
         title: item.title,
+        customerreferencenumber: item.customerreferencenumber,
       });
     }, 1000);
   };
@@ -206,7 +207,7 @@ class NewCartSearch extends Component {
                         {item.customerreferencenumber}
                       </h6>
                       <h6>
-                        <b>Order Confirmation#</b> {item.orderconfirmationid}
+                        <b>Order Confirmation# </b> {item.orderconfirmationid}
                       </h6>
                       <h6>
                         <b>Job Name: </b>
