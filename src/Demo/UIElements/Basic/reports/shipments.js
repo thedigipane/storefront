@@ -152,22 +152,30 @@ class ShipmentComponent extends Component {
                   <p className="mb-2">
                     <b>{item && item.title_oc}</b>
                   </p>
-                  <p className="mb-2">
-                    <b>{item && item.customerreferencenumber}</b>
+                  <p className="mb-1">
+                    <b>Customer# </b>
+                    {item && item.customerreferencenumber}
                   </p>
-                  <p className="mb-2">
-                    <b>{item.jobname}</b>
+                  <p className="mb-1">
+                    <b>Order Confirmation# </b>
+                    {item.idOC}
                   </p>
-                  <p className="mb-2">
-                    Cost Center Id:s <b>{item.costcenterid}</b>
+                  <p className="mb-1">
+                    <b>Job Name: </b>
+                    {item.jobname}
                   </p>
                   <p className="mb-5">
-                    OC Id: <b>{item.idOC}</b>
+                    <b>Cost Center# </b>
+                    {item.costcenterid}
                   </p>
-                  <p className="mb-2">
+                  {/* <p className="mb-5">
+                    <b>Title: </b>
+                    {item.title}
+                  </p> */}
+                  <p className="mb-1">
                     {moment(item.createdOn).format("ddd DD MMM-YYYY hh:mm A")}
                   </p>
-                  <p className="mb-2">
+                  <p className="mb-1">
                     {item.fname} {item.lname}
                   </p>
                 </Card.Body>
