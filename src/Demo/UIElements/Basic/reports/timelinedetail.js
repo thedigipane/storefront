@@ -323,6 +323,11 @@ class TimelineDetailComponent extends Component {
               </tr>
             </tbody>
           </Table>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <Table
             striped
             bordered
