@@ -476,10 +476,10 @@ class TimelineDetailComponent extends Component {
                     <span>{item.saleprice}</span>
                   </td> */}
                   <td style={{ textAlign: "center", color: "black" }}>
-                    <span>{item.shippedQuantity}</span>
+                    <span>{item.quantity}</span>
                   </td>
                   <td style={{ textAlign: "center", color: "black" }}>
-                    <span>{item.quantity}</span>
+                    <span>{item.shippedQuantity}</span>
                   </td>
                   <td style={{ textAlign: "center", color: "black" }}>
                     <span>{item.backOrderQuantity}</span>
