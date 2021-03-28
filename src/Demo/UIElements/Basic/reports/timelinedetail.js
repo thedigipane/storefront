@@ -67,6 +67,7 @@ class TimelineDetailComponent extends Component {
     const fontSizeBig = "22px";
     const fontSizeMedium = "16px";
     const fontSizeSmall = "15px";
+
     return (
       <Aux>
         {loading && <Loader />}
@@ -78,6 +79,20 @@ class TimelineDetailComponent extends Component {
           </Col>
           <Col>
             <ReactToPrint
+              documentTitle={
+                shipment && shipment.status === 1
+                  ? `Partial_ORDER#${
+                      shipment && shipment.orderConfirmationCode
+                    }_CUSTOMER_REFERENCE#${
+                      shipment && shipment.customerReferenceNumber
+                    }`
+                  : `Completed_ORDER#${
+                      shipment && shipment.orderConfirmationCode
+                    }_CUSTOMER_REFERENCE#${
+                      shipment && shipment.customerReferenceNumber
+                    }`
+              }
+              copyStyles="true"
               trigger={() => {
                 return (
                   <Row noGutters>
@@ -310,7 +325,7 @@ class TimelineDetailComponent extends Component {
                         textAlign: "right",
                       }}
                     >
-                      Customer Reference: PO#{" "}
+                      Customer Reference:{" "}
                       <span>
                         {shipment && shipment.customerReferenceNumber}
                       </span>
