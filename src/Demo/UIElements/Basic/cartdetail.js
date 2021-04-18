@@ -424,7 +424,7 @@ class CartDetailComponent extends Component {
                   variant="danger"
                   onClick={() => this.setState({ showpopupdelete: true })}
                 >
-                  Delete
+                  Delete Cart
                 </Button>
               </Col>
               {item && item.idcart_tx && (
@@ -444,7 +444,7 @@ class CartDetailComponent extends Component {
                     })
                   }
                 >
-                  Checkout
+                  Checkout Cart
                 </Button>
               </Col>
             </Row>
