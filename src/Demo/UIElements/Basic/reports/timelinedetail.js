@@ -62,6 +62,9 @@ class TimelineDetailComponent extends Component {
   };
   render() {
     const { loading, items, job, shipment } = this.state;
+    const sortedItems = items.sort((a, b) =>
+      a.lineItem > b.lineItem ? 1 : -1
+    );
     const fontFamilyName = "Calibri, sans-serif";
     const lineSpacing = "200%";
     const fontSizeBig = "22px";
@@ -425,7 +428,7 @@ class TimelineDetailComponent extends Component {
               </tr>
             </thead>
             <tbody>
-              {items.map((item, index) => (
+              {sortedItems.map((item, index) => (
                 <tr
                   key={index}
                   style={{
